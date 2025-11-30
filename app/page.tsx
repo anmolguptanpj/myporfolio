@@ -1,23 +1,33 @@
 import Image from "next/image";
-
+import Link from "next/link";
+import htmlImg from "@/public/html5-01-svgrepo-com.svg"
+import cssImg from"@/public/css-3-svgrepo-com.svg"
+import nodeImg from"@/public/node-js-svgrepo-com.svg"
+import reactImg from"@/public/react-logo-svgrepo-com.svg"
+import jsImg from"@/public/javascript-svgrepo-com.svg"
+import mongoImg from"@/public/mongodb-logo-svgrepo-com.svg"
+import nextImg from"@/public/nextjs-fill-svgrepo-com.svg"
+import tailImg from"@/public/tailwind-svgrepo-com.svg"
+import expressImg from"@/public/express-svgrepo-com.svg"
+import mongooseImg from"@/public/Mongoose.js.svg"
 
 
 export default function Home() {
    const portfolio = {
     name:"Anmol Gupta",
     education: "BCA First Semester running",
-    skills: [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Node.js",
-    "React.js",
-    "MongoDB",
-    "Next.js",
-    "Tailwind CSS",
-    "Express.js",
-    "Mongoose"
-  ],
+    skills: {
+    "HTML":htmlImg,
+    "CSS": cssImg,
+    "JavaScript":jsImg,
+    "Node.js":nodeImg,
+    "React.js":reactImg,
+    "MongoDB":mongoImg,
+    "Next.js":nextImg,
+    "Tailwind CSS":tailImg,
+    "Express.js":expressImg,
+    "Mongoose":mongooseImg
+    },
   projects:{
     "projectOne":{
       "Title":"TODO With Authentication ",
@@ -58,10 +68,33 @@ export default function Home() {
 
   return (
   <div>
-  <header>
-    <div></div>
-    <div></div>
+  <header className="flex flex-row w-full h-15 pl-10 pr-10  ">
+    <div className="lg:w-[20vw] w-screen flex flex-row justify-center items-center">{portfolio.name}</div>
+    <div className=" lg:flex hidden flex-row items-center justify-end w-[80vw]">
+      <ul className=" flex  flex-row gap-5">
+          <li><Link href={""}>Skills</Link></li>
+          <li><Link href={""}>Projects</Link></li>
+          <li><Link href={""}>About</Link></li>
+          <li><Link href={""}>Contact Me</Link></li>
+      </ul>
+    </div>
   </header>
+
+  <div className="w-screen text-center pt-10 ">Skills</div>
+  <div className="flex flex-row flex-wrap justify-center lg:m-10  m-10">
+          {Object.entries(portfolio.skills).map(([key,value])=>(
+            <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-2  pt-5  rounded-xl " key={key}>
+            <div className=" lg:w-20 w-20 h-20   lg:h-20"><Image src={value} className="object-contain" alt={`${key}`}/></div>
+            <div className="flex justify-baseline flex-wrap items-baseline text-xs text-black mt-2">{key}</div>
+        </div>
+        ))}
+  </div>
+  
+  <div>
+    {Object.entries(portfolio.projects).map(([key,p])=>(
+      <div></div>
+    ))}
+  </div>
   
   </div>
   );
