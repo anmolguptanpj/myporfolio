@@ -10,6 +10,9 @@ import nextImg from"@/public/nextjs-fill-svgrepo-com.svg"
 import tailImg from"@/public/tailwind-svgrepo-com.svg"
 import expressImg from"@/public/express-svgrepo-com.svg"
 import mongooseImg from"@/public/Mongoose.js.svg"
+import gmailImg from "@/public/svgviewer-output.svg"
+import githubImg from "@/public/github-svgrepo-com.svg"
+import linkedImg from "@/public/linkedin-svgrepo-com.svg"
 
 
 export default function Home() {
@@ -35,7 +38,7 @@ export default function Home() {
         "Proper management of Todo management with CRUD",
         "Implementation of Access token and Refresh token"],
       "Tech Stack":["MongoDB","React","Express","UseContext"],
-      "Links":"https://todo-v2-frontend.vercel.app/"
+      "links":["https://todo-v2-frontend.vercel.app/"]
     },
     "projectTwo":{
       "Title":"FULL STACK ECOMMERCE MULTI-SELLER APP",
@@ -51,7 +54,7 @@ export default function Home() {
         "Focused on Real life day to day business needs"
       ],
       "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js"],
-      "Links":[],
+      "links":[""],
     }
   },
   "about":`I’m Anmol Gupta, originally from Nepal and currently in Delhi for higher studies and a tech-focused career.
@@ -59,9 +62,9 @@ export default function Home() {
   Before entering development, I spent 3.5 years running a food wholesale business and operated a cloud-kitchen for 6 months. After March 2025, I shifted fully into software development to build a long-term career in technology.`
   ,
   contact: {
-  email: "anmolguptanpj282@gmail.com",
-  github: "https://github.com/anmolguptanpj",
-  linkedin:"https://www.linkedin.com/in/itheanmolgupta/"
+  Gmail: {"mailto:anmolguptanpj282@gmail.com":gmailImg},
+  Github: {"https://github.com/anmolguptanpj":githubImg},
+  Linkedin:{"https://www.linkedin.com/in/itheanmolgupta/":linkedImg}
 }
 
    }
@@ -69,7 +72,7 @@ export default function Home() {
   return (
   <div>
   <header className="flex flex-row w-full h-15 pl-10 pr-10  ">
-    <div className="lg:w-[20vw] w-screen flex flex-row justify-center items-center">{portfolio.name}</div>
+    <div className="lg:w-[20vw] w-full flex flex-row justify-center items-center">{portfolio.name}</div>
     <div className=" lg:flex hidden flex-row items-center justify-end w-[80vw]">
       <ul className=" flex  flex-row gap-5">
           <li><Link href={""}>Skills</Link></li>
@@ -80,8 +83,16 @@ export default function Home() {
     </div>
   </header>
 
-  <div className="w-screen text-center pt-10 ">Skills</div>
-  <div className="flex flex-row flex-wrap justify-center lg:m-10  m-10">
+  <section className="text-center mt-16 px-5">
+        <h1 className="text-4xl font-bold">Hi, I’m {portfolio.name}</h1>
+        <p className="mt-3 text-gray-300 text-lg">
+          Full Stack Developer • MERN • Next.js 
+        </p>
+      </section>
+  
+
+  <div className="w-full text-center pt-10 ">Skills</div>
+  <div className="flex flex-row flex-wrap justify-center ">
           {Object.entries(portfolio.skills).map(([key,value])=>(
             <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-2  pt-5  rounded-xl " key={key}>
             <div className=" lg:w-20 w-20 h-20   lg:h-20"><Image src={value} className="object-contain" alt={`${key}`}/></div>
@@ -90,12 +101,52 @@ export default function Home() {
         ))}
   </div>
   
-  <div>
+  <div className="flex flex-col items-center justify-center text-xs lg:text-[1rem]  ">
+    <p className="">Projects</p>
     {Object.entries(portfolio.projects).map(([key,p])=>(
-      <div></div>
+     <div className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
+      <div className="  rounded-xl border-2 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
+     <div className="">
+     <div><p className=" font-bold text-center">{p.Title}</p></div>
+     
+     <div className="pt-5 pb-5">   <p className="font-bold">Features</p><ul className=" pl-6 list-disc">{(p.Features).map((f)=>(<li key={f}>{f}</li>))}</ul></div>
+     <div className="">
+     <p>Tech stack : </p>
+      <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
+     
+     <div className="flex mt-6"><p>Link:</p><ul>{(p.links).map((k)=>(<Link href={k} key={k}>{k}</Link>))}</ul></div>
+     </div>
+       
+     </div>
+     </div>
     ))}
   </div>
+
+
+       <div className="flex justify-center items-center ">
+       <div className="lg:w-[47%] text-xs lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex flex-col   p-5">
+        
+        <p className="">  {portfolio.about}</p>
+        </div>
+       </div>
+
+  <footer className=" flex justify-center items-center">
+  <div  className="flex gap-10  ">{Object.entries(portfolio.contact).map(([platform,details])=>
+  {const[[link,icon]] = Object.entries(details);
+    return(<div className="border-0 w-20 h-10 pl-8 font-bold rounded-xl text-xl flex justify-center items-center  " key={platform}>
+     
+      <div ><Link href={link}> 
+      <div className="flex justify-center items-center gap-2"><Image  className="w-10 h-5 object-contain" src={icon} alt={`${icon}`}/>
+      <div className="">{platform}</div>
+      
+      </div>
+      </Link></div>
+    </div>)
+  })}</div>
+</footer>
+
   
   </div>
+
   );
 }
