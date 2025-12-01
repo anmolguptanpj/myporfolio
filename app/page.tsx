@@ -71,19 +71,19 @@ export default function Home() {
 
   return (
   <div>
-  <header className="flex flex-row w-full h-15 pl-10 pr-10  ">
-    <div className="lg:w-[20vw] w-full flex flex-row justify-center items-center">{portfolio.name}</div>
+  <header className="flex flex-row w-full  border-b h-16 pl-10 pr-10  ">
+    <div className="lg:w-[20vw] w-full font-bold text-3xl shadow-amber-200 flex flex-row justify-center items-center">{portfolio.name}</div>
     <div className=" lg:flex hidden flex-row items-center justify-end w-[80vw]">
-      <ul className=" flex  flex-row gap-5">
-          <li><Link href={""}>Skills</Link></li>
-          <li><Link href={""}>Projects</Link></li>
-          <li><Link href={""}>About</Link></li>
-          <li><Link href={""}>Contact Me</Link></li>
+      <ul className=" flex font-bold flex-row gap-5">
+          <li><Link href={"#skills"}>Skills</Link></li>
+          <li><Link href={"#projects"}>Projects</Link></li>
+          <li><Link href={"#about"}>About</Link></li>
+          <li><Link href={"#contacts"}>Contact Me</Link></li>
       </ul>
     </div>
   </header>
 
-  <section className="text-center mt-16 px-5">
+  <section className="text-center mb-5 mt-16 px-5">
         <h1 className="text-4xl font-bold">Hi, I’m {portfolio.name}</h1>
         <p className="mt-3 text-gray-300 text-lg">
           Full Stack Developer • MERN • Next.js 
@@ -91,7 +91,7 @@ export default function Home() {
       </section>
   
 
-  <div className="w-full text-center pt-10 ">Skills</div>
+  <div id="skills" className="w-full text-center border-t pt-10 ">Skills</div>
   <div className="flex flex-row flex-wrap justify-center ">
           {Object.entries(portfolio.skills).map(([key,value])=>(
             <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-2  pt-5  rounded-xl " key={key}>
@@ -101,8 +101,8 @@ export default function Home() {
         ))}
   </div>
   
-  <div className="flex flex-col items-center justify-center text-xs lg:text-[1rem]  ">
-    <p className="">Projects</p>
+  <div className="flex border-t flex-col pt-10 items-center justify-center text-xs lg:text-[1rem]  ">
+    <p id="projects" className="">Projects</p>
     {Object.entries(portfolio.projects).map(([key,p])=>(
      <div className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
       <div className="  rounded-xl border-2 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
@@ -113,8 +113,8 @@ export default function Home() {
      <div className="">
      <p>Tech stack : </p>
       <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
-     
-     <div className="flex mt-6"><p>Link:</p><ul>{(p.links).map((k)=>(<Link href={k} key={k}>{k}</Link>))}</ul></div>
+      <p className="mt-6">Link:</p>
+     <div className="flex flex-col"><ul className="pl-6 list-disc">{(p.links).map((k)=>(<Link href={k} key={k}><li>{k}</li></Link>))}</ul></div>
      </div>
        
      </div>
@@ -123,17 +123,20 @@ export default function Home() {
   </div>
 
 
-       <div className="flex justify-center items-center ">
-       <div className="lg:w-[47%] text-xs lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex flex-col   p-5">
+       <div className="flex flex-col justify-center border-t pt-10 items-center ">
+        <p id="about">About</p>
+    
+       <div className="lg:w-[47%] mt-5 text-xs pt-5 lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex flex-col   p-5">
         
-        <p className="">  {portfolio.about}</p>
+        <p  className="">  {portfolio.about}</p>
         </div>
        </div>
 
-  <footer className=" flex justify-center items-center">
+  <footer id="contacts" className="border-t gap-2 p-10 flex justify-center items-center">
+    <p className="text-3xl font-bold " >Contact me :</p>
   <div  className="flex gap-10  ">{Object.entries(portfolio.contact).map(([platform,details])=>
   {const[[link,icon]] = Object.entries(details);
-    return(<div className="border-0 w-20 h-10 pl-8 font-bold rounded-xl text-xl flex justify-center items-center  " key={platform}>
+    return(<div className="border-2 w-auto text-black bg-slate-300  h-10 p-5 hover:bg-white  rounded-xl text-xl flex justify-center items-center  " key={platform}>
      
       <div ><Link href={link}> 
       <div className="flex justify-center items-center gap-2"><Image  className="w-10 h-5 object-contain" src={icon} alt={`${icon}`}/>
