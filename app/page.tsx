@@ -35,7 +35,7 @@ export default function Home() {
     "projectOne":{
       "Title":"TODO With Authentication ",
       "Features":["Used JWT tokens for authentication",
-        "Proper management of Todo management with CRUD",
+        "Proper management of Todo creation and delete  with CRUD        ",
         "Implementation of Access token and Refresh token"],
       "Tech Stack":["MongoDB","React","Express","UseContext"],
       "links":["https://todo-v2-frontend.vercel.app/"]
@@ -91,7 +91,7 @@ export default function Home() {
       </section>
   
 
-  <div id="skills" className="w-full text-center border-t pt-10 ">Skills</div>
+  <div id="skills" className="w-full text-center text-2xl border-t pt-10 ">Skills</div>
   <div className="flex flex-row flex-wrap justify-center ">
           {Object.entries(portfolio.skills).map(([key,value])=>(
             <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-2  pt-5  rounded-xl " key={key}>
@@ -102,7 +102,7 @@ export default function Home() {
   </div>
   
   <div className="flex border-t flex-col pt-10 items-center justify-center text-xs lg:text-[1rem]  ">
-    <p id="projects" className="">Projects</p>
+    <p id="projects" className="text-2xl">Projects</p>
     {Object.entries(portfolio.projects).map(([key,p])=>(
      <div className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
       <div className="  rounded-xl border-2 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
@@ -124,7 +124,7 @@ export default function Home() {
 
 
        <div className="flex flex-col justify-center border-t pt-10 items-center ">
-        <p id="about">About</p>
+        <p id="about" className="text-2xl">About</p>
     
        <div className="lg:w-[47%] mt-5 text-xs pt-5 lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex flex-col   p-5">
         
@@ -132,11 +132,11 @@ export default function Home() {
         </div>
        </div>
 
-  <footer id="contacts" className="border-t gap-2 p-10 flex justify-center items-center">
-    <p className="text-3xl font-bold " >Contact me :</p>
-  <div  className="flex gap-10  ">{Object.entries(portfolio.contact).map(([platform,details])=>
+  <footer id="contacts" className="border-t gap-2 p-10 flex flex-col lg:flex-row justify-center items-center">
+    <p className="lg:text-3xl " >Contact me :</p>
+  <div  className="flex gap-10 flex-col  lg:flex-row  ">{Object.entries(portfolio.contact).map(([platform,details])=>
   {const[[link,icon]] = Object.entries(details);
-    return(<div className="border-2 w-auto text-black bg-slate-300  h-10 p-5 hover:bg-white  rounded-xl text-xl flex justify-center items-center  " key={platform}>
+    return(<div className="border-2 w-auto text-black bg-slate-300  h-10 p-3 hover:bg-white  rounded-xl text-xl flex flex-col  lg:flex-row justify-center items-center  " key={platform}>
      
       <div ><Link href={link}> 
       <div className="flex justify-center items-center gap-2"><Image  className="w-10 h-5 object-contain" src={icon} alt={`${icon}`}/>
