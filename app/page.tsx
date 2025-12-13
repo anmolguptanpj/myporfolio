@@ -13,6 +13,8 @@ import mongooseImg from"@/public/Mongoose.js.svg"
 import gmailImg from "@/public/svgviewer-output.svg"
 import githubImg from "@/public/github-svgrepo-com.svg"
 import linkedImg from "@/public/linkedin-svgrepo-com.svg"
+import postgreImg from "@/public/postgresql-logo-svgrepo-com.svg"
+import prismaImg from "@/public/light-prisma-svgrepo-com.svg"
 
 
 export default function Home() {
@@ -29,32 +31,45 @@ export default function Home() {
     "Next.js":nextImg,
     "Tailwind CSS":tailImg,
     "Express.js":expressImg,
-    "Mongoose":mongooseImg
+    "Mongoose":mongooseImg,
+    "PostgreSQL":postgreImg,
+    "Prisma":prismaImg
     },
   projects:{
     "projectOne":{
       "Title":"TODO With Authentication ",
-      "Features":["Used JWT tokens for authentication",
-        "Proper management of Todo creation and delete  with CRUD        ",
-        "Implementation of Access token and Refresh token"],
-      "Tech Stack":["MongoDB","React","Express","UseContext"],
-      "links":["https://todo-v2-frontend.vercel.app/"]
+      "Features":["JWT-based authentication",
+  "Access token and refresh token implementation",
+  "Secure user login and session handling",
+  "Create, read, update, and delete (CRUD) todos",
+  "Authenticated routes protection",
+  "Proper state management using React Context",
+  "Responsive UI built with Tailwind CSS"],
+      "Tech Stack":["MongoDB","React","Express","UseContext","Tailwind CSS"],
+      "Live Demo":["https://todo-v2-frontend.vercel.app/"]
     },
     "projectTwo":{
-      "Title":"FULL STACK ECOMMERCE MULTI-SELLER APP",
-      "Features":["Three frontend App:Admin,Supplier,Customer",
-        "Role based Authentication",
-        "Through Email default Account Activation for suppliers and staffs",
-        "Creating,Editing and Managing Products and Supplier and other staff level accounts",
-        "JWT Authentication",
-        "Implementation of Access token and Refresh token",
-        "Mongo DB indexing,Virtualization and population",
-        "Cloudinary,MongoDB atlas",
-        "Next js based sales frontend App",
-        "Focused on Real life day to day business needs"
+      "Title":"FULL STACK MVP for  ECOMMERCE MULTI-SELLER APP",
+      "Features":["Three separate frontend applications: Admin, Supplier, Customer",
+  "Role-based access control (RBAC)",
+  "Email-based account activation for suppliers and staff",
+  "Create, edit, and manage products, suppliers, and staff accounts",
+  "JWT authentication with access and refresh tokens",
+  "Token handling via localStorage and secure cookies",
+  "MongoDB pagination, population, and virtualization",
+  "Media handling using Cloudinary",
+  "Next.js-based sales full-stack application",
+  "Authentication using HTTP-only cookies",
+  "UI built with shadcn/ui for login and signup flows",
+  "MongoDB with Mongoose ORM for products and suppliers",
+  "PostgreSQL with Prisma ORM for customers, carts, and orders",
+  "Deployed on Amazon EC2",
+  "Migrated backend from HTTP to HTTPS",
+  "Configured Nginx and Certbot (SSL) on Amazon Linux VM"
+
       ],
-      "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js"],
-      "links":[""],
+      "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js","PostgreSql","Prizma"],
+      "Live Demo":["https://codex-swart-sigma.vercel.app/"],
     }
   },
   "about":`I’m Anmol Gupta, originally from Nepal and currently in Delhi for higher studies and a tech-focused career.
@@ -94,7 +109,7 @@ export default function Home() {
   <div id="skills" className="w-full text-center text-2xl border-t pt-10 ">Skills</div>
   <div className="flex flex-row flex-wrap justify-center ">
           {Object.entries(portfolio.skills).map(([key,value])=>(
-            <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-2  pt-5  rounded-xl " key={key}>
+            <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-3 border-amber-300 pt-5  rounded-xl " key={key}>
             <div className=" lg:w-20 w-20 h-20   lg:h-20"><Image src={value} className="object-contain" alt={`${key}`}/></div>
             <div className="flex justify-baseline flex-wrap items-baseline text-xs text-black mt-2">{key}</div>
         </div>
@@ -105,7 +120,7 @@ export default function Home() {
     <p id="projects" className="text-2xl">Projects</p>
     {Object.entries(portfolio.projects).map(([key,p])=>(
      <div className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
-      <div className="  rounded-xl border-2 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
+      <div className="  rounded-xl border-3 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
      <div className="">
      <div><p className=" font-bold text-center">{p.Title}</p></div>
      
@@ -113,8 +128,8 @@ export default function Home() {
      <div className="">
      <p>Tech stack : </p>
       <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
-      <p className="mt-6">Link:</p>
-     <div className="flex flex-col"><ul className="pl-6 list-disc">{(p.links).map((k)=>(<Link href={k} key={k}><li>{k}</li></Link>))}</ul></div>
+      <p className="mt-6">Live demo:</p>
+     <div className="flex flex-col"><ul className="pl-6 list-disc">{(p["Live Demo"]).map((k)=>(<Link className="hover:underline" href={k} key={k}><li>{k}</li></Link>))}</ul></div>
      </div>
        
      </div>
