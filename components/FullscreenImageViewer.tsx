@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import type { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type ImageItem = {
   id: number;
@@ -13,15 +13,13 @@ type ImageItem = {
 
 type Props = {
   images: ImageItem[];
-  startIndex?: number;
 };
 
-export default function FullscreenImageViewer({
-  images,
-  startIndex = 0,
-}: Props) {
+export default function FullscreenImageViewer({ images }: Props) {
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
-  const [index, setIndex] = useState(startIndex);
+  const [index, setIndex] = useState(0);
 
   const next = () => setIndex((i) => (i + 1) % images.length);
   const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
@@ -42,17 +40,44 @@ export default function FullscreenImageViewer({
 
   return (
     <>
-      {/* Thumbnail */}
-      <div onClick={() => setOpen(true)} className="cursor-pointer w-fit">
-        <Image
-          src={images[index].src}
-          alt={images[index].alt || ""}
-          width={400}
-          height={250}
-          className="rounded-lg"
-        />
+      {/* Header */}
+      <div className="flex items-center gap-4 p-6">
+        <button
+          onClick={() => router.push("/")}
+          className="
+            rounded-xl px-4 py-2
+            bg-black text-white
+            hover:bg-black/80
+          "
+        >
+          ← Back
+        </button>
+        <h1 className="text-2xl font-semibold">Gallery</h1>
       </div>
 
+      {/* Gallery Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6">
+        {images.map((img, i) => (
+          <div
+            key={img.id}
+            onClick={() => {
+              setIndex(i);
+              setOpen(true);
+            }}
+            className="cursor-pointer overflow-hidden rounded-xl"
+          >
+            <Image
+              src={img.src}
+              alt={img.alt || ""}
+              width={400}
+              height={300}
+              className="h-full w-full object-cover hover:scale-105 transition-transform"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Fullscreen Viewer */}
       {open && (
         <div className="fixed inset-0 z-[999] bg-black">
 
@@ -100,8 +125,8 @@ export default function FullscreenImageViewer({
             ›
           </button>
 
-          {/* IMAGE — YouTube Style */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
+          {/* Image */}
+          <div className="absolute inset-0 flex items-center justify-center">
             <Image
               src={images[index].src}
               alt={images[index].alt || ""}
