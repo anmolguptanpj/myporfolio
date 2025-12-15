@@ -46,7 +46,8 @@ export default function Home() {
   "Proper state management using React Context",
   "Responsive UI built with Tailwind CSS"],
       "Tech Stack":["MongoDB","React","Express","UseContext","Tailwind CSS"],
-      "Live Demo":["https://todo-v2-frontend.vercel.app/"]
+      "Live Demo":["https://todo-v2-frontend.vercel.app/"],
+      "View Image":"/images/project1"
     },
     "projectTwo":{
       "Title":"FULL STACK MVP for  ECOMMERCE MULTI-SELLER APP",
@@ -70,6 +71,7 @@ export default function Home() {
       ],
       "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js","PostgreSql","Prizma"],
       "Live Demo":["https://codex-swart-sigma.vercel.app/"],
+      "View Image":"/images/project2"
     }
   },
   "about":`I’m Anmol Gupta, originally from Nepal and currently in Delhi for higher studies and a tech-focused career.
@@ -130,6 +132,7 @@ export default function Home() {
       <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
       <p className="mt-6">Live demo:</p>
      <div className="flex flex-col"><ul className="pl-6 list-disc">{(p["Live Demo"]).map((k)=>(<Link className="hover:underline" href={k} key={k}><li>{k}</li></Link>))}</ul></div>
+     <div  className=" mt-6 flex flex-col" ><Link  className="px-2 bg-green-500 hover:bg-blue-500" href={p["View Image"]}>View Screenshots</Link></div>
      </div>
        
      </div>
