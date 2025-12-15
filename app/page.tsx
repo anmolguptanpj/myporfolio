@@ -18,6 +18,9 @@ import prismaImg from "@/public/light-prisma-svgrepo-com.svg"
 
 
 export default function Home() {
+
+
+  
    const portfolio = {
     name:"Anmol Gupta",
     education: "BCA First Semester running",
@@ -132,7 +135,7 @@ export default function Home() {
       <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
       <p className="mt-6">Live demo:</p>
      <div className="flex flex-col"><ul className="pl-6 list-disc">{(p["Live Demo"]).map((k)=>(<Link className="hover:underline" href={k} key={k}><li>{k}</li></Link>))}</ul></div>
-     <div  className=" mt-6 flex flex-col" ><Link  className="px-2 bg-green-500 hover:bg-blue-500" href={p["View Image"]}>View Screenshots</Link></div>
+     <div  className=" mt-6 w-full  flex flex-row justify-center" ><Link  className="px-1 py-0.5 rounded-2xl w-45 text-center bg-blue-500 focus:bg-green-500 hover:bg-green-500" href={p["View Image"]}>View Screenshots</Link></div>
      </div>
        
      </div>
