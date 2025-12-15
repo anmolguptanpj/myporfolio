@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import htmlImg from "@/public/html5-01-svgrepo-com.svg"
@@ -15,10 +16,15 @@ import githubImg from "@/public/github-svgrepo-com.svg"
 import linkedImg from "@/public/linkedin-svgrepo-com.svg"
 import postgreImg from "@/public/postgresql-logo-svgrepo-com.svg"
 import prismaImg from "@/public/light-prisma-svgrepo-com.svg"
+import { useState } from "react";
+
 
 
 export default function Home() {
 
+  const linkS = "hover:underline"
+  const resume = "bg-blue-500 w-40 text-center hover:bg-green-500 px-2 rounded-xl"
+  const [message,setMessage] = useState("")
 
   
    const portfolio = {
@@ -95,10 +101,10 @@ export default function Home() {
     <div className="lg:w-[20vw] w-full font-bold text-3xl shadow-amber-200 flex flex-row justify-center items-center">{portfolio.name}</div>
     <div className=" lg:flex hidden flex-row items-center justify-end w-[80vw]">
       <ul className=" flex font-bold flex-row gap-5">
-          <li><Link href={"#skills"}>Skills</Link></li>
-          <li><Link href={"#projects"}>Projects</Link></li>
-          <li><Link href={"#about"}>About</Link></li>
-          <li><Link href={"#contacts"}>Contact Me</Link></li>
+          <li><Link className={linkS} href={"#skills"}>Skills</Link></li>
+          <li><Link className={linkS} href={"#projects"}>Projects</Link></li>
+          <li><Link className={linkS} href={"#about"}>About</Link></li>
+          <li><Link className={linkS} href={"#contacts"}>Contact Me</Link></li>
       </ul>
     </div>
   </header>
@@ -124,7 +130,7 @@ export default function Home() {
   <div className="flex border-t flex-col pt-10 items-center justify-center text-xs lg:text-[1rem]  ">
     <p id="projects" className="text-2xl">Projects</p>
     {Object.entries(portfolio.projects).map(([key,p])=>(
-     <div className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
+     <div key={key} className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
       <div className="  rounded-xl border-3 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
      <div className="">
      <div><p className=" font-bold text-center">{p.Title}</p></div>
@@ -151,6 +157,31 @@ export default function Home() {
         
         <p  className="">  {portfolio.about}</p>
         </div>
+       </div>
+
+       <div className="flex flex-col justify-center border-t pt-10 items-center ">
+        <p className="text-2xl">Resume</p>
+       <div className="lg:w-[47%] mt-5  text-xs pt-5 lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex gap-3   p-5">
+
+              <a
+              className={resume}
+               href= "/resume/resumeAnmolGupta.pdf"
+               target="_blank"
+               rel="noopener norefferrer"
+              > View Resume </a>
+              <a
+              className={resume}
+               href= "/resume/resumeAnmolGupta.pdf"
+               download="Anmol_Gupta_Resume.pdf"
+               onClick={()=>{setMessage("Resume has been added to downloads.");
+                setTimeout(()=>setMessage(""),2000)
+
+               }
+              }
+              >Download Resume</a>
+        </div>
+        <div className="h-10">{message && <p>{message}</p>}</div>
+
        </div>
 
   <footer id="contacts" className="border-t gap-2 p-10 flex flex-col lg:flex-row justify-center items-center">
