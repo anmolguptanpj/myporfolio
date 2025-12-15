@@ -141,7 +141,7 @@ export default function FullscreenImageViewer({ images }: Props) {
           {images[index].description && (
             <div
               className="
-                absolute bottom-0 left-0 right-0 z-20
+                absolute bottom-0 left-0 w-full font-bold text-xl text-center right-0 z-20
                 bg-gradient-to-t from-black/80 to-transparent
                 text-white text-sm
                 px-6 py-4
