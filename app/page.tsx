@@ -56,7 +56,7 @@ export default function Home() {
   "Responsive UI built with Tailwind CSS"],
       "Tech Stack":["MongoDB","React","Express","UseContext","Tailwind CSS"],
       "Live Demo":["https://todo-v2-frontend.vercel.app/"],
-      "View Image":"/images/project1"
+      "View Image":"/project1"
     },
     "projectTwo":{
       "Title":"FULL STACK MVP for  ECOMMERCE MULTI-SELLER APP",
@@ -80,7 +80,7 @@ export default function Home() {
       ],
       "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js","PostgreSql","Prizma"],
       "Live Demo":["https://codex-swart-sigma.vercel.app/"],
-      "View Image":"/images/project2"
+      "View Image":"/project2"
     }
   },
   "about":`I’m Anmol Gupta, originally from Nepal and currently in Delhi for higher studies and a tech-focused career.
