@@ -14,17 +14,17 @@ type Skill = {
 
 const skills: Skill[] = [
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/react/61DAFB", name: "React.js" },
-  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/nextdotjs/FFFFFF", name: "Next.js" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/nextdotjs/111827", name: "Next.js" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/tailwindcss/38BDF8", name: "Tailwind CSS" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/html5/E34F26", name: "HTML5" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/css/663399", name: "CSS3" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/nodedotjs/5FA04E", name: "Node.js" },
-  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/express/FFFFFF", name: "Express.js" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/express/111827", name: "Express.js" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/fastapi/009688", name: "FastAPI" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/javascript/F7DF1E", name: "JavaScript" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/typescript/3178C6", name: "TypeScript" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/python/3776AB", name: "Python" },
-  { cat: "data", logoUrl: "https://cdn.simpleicons.org/pandas/FFFFFF", name: "Pandas" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/pandas/150458", name: "Pandas" },
   { cat: "data", logoUrl: "https://cdn.simpleicons.org/numpy/4DABCF", name: "NumPy" },
   { cat: "data", logoUrl: "https://cdn.simpleicons.org/scikitlearn/F7931E", name: "Scikit-learn" },
   { cat: "data", customLogo: "xgboost", name: "XGBoost" },
@@ -35,12 +35,12 @@ const skills: Skill[] = [
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/postgresql/4169E1", name: "PostgreSQL" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/mysql/4479A1", name: "MySQL" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/sqlite/003B57", name: "SQLite" },
-  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/prisma/FFFFFF", name: "Prisma" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/prisma/2D3748", name: "Prisma" },
   { cat: "infra", customLogo: "aws", name: "AWS EC2" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/redis/FF4438", name: "Redis" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/nginx/009639", name: "NGINX" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/git/F05032", name: "Git" },
-  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/github/FFFFFF", name: "GitHub" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/github/181717", name: "GitHub" },
 ];
 
 const projects = [
@@ -52,7 +52,7 @@ const projects = [
     tags: ["React.js", "MongoDB", "Express.js", "JWT", "Tailwind CSS"],
     links: [
       
-      ["Backend ↗", "https://github.com/anmolguptanpj/TodoV2_backend"],
+      ["Backend ->", "https://github.com/anmolguptanpj/TodoV2_backend"],
     ],
   },
   {
@@ -61,7 +61,7 @@ const projects = [
     visual: "ml",
     desc: "Production ML pipeline on German Credit Dataset. Benchmarked 4 classifiers (XGBoost 67%), exported LabelEncoder artifacts, full Streamlit deployment.",
     tags: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Poetry"],
-    links: [["GitHub ↗", "https://github.com/anmolguptanpj/Credit_risk_analysis_-_ml_model"]],
+    links: [["GitHub ->", "https://github.com/anmolguptanpj/Credit_risk_analysis_-_ml_model"]],
   },
   {
     num: "Project 04",
@@ -69,7 +69,7 @@ const projects = [
     visual: "etl",
     desc: "Scalable ETL pipeline ingesting 2GB+ multi-source datasets. Advanced SQL KPI analysis across 100+ vendors. Delivered 15+ BI dashboards with actionable insights.",
     tags: ["Python", "SQLAlchemy", "Pandas", "MySQL", "Seaborn"],
-    links: [["GitHub ↗", "https://github.com/anmolguptanpj/Vendor_performance_analysis"]],
+    links: [["GitHub ->", "https://github.com/anmolguptanpj/Vendor_performance_analysis"]],
   },
   {
     num: "Project 05",
@@ -77,7 +77,7 @@ const projects = [
     visual: "media",
     desc: "Backend-focused CRUD media platform supporting image and video uploads with structured post management. Features FastAPI native auth, SQLAlchemy ORM with SQLite, Pydantic schema validation, and a Streamlit frontend for rapid interaction.",
     tags: ["Python", "FastAPI", "SQLite", "SQLAlchemy", "Pydantic", "Streamlit"],
-    links: [["GitHub ↗", "https://github.com/anmolguptanpj/FastAPI-Backend-project"]],
+    links: [["GitHub ->", "https://github.com/anmolguptanpj/FastAPI-Backend-project"]],
   },
 ];
 
@@ -85,17 +85,17 @@ const experience = [
   {
     date: "2025 - Present",
     role: "Software Engineer (Self-Directed)",
-    org: "Open Source & Personal Projects · Delhi, India",
+    org: "Open Source & Personal Projects - Delhi, India",
     desc: "Building production full-stack systems - multi-vendor ecommerce platforms, ML pipelines, FastAPI backends. Rapidly advancing through backend architecture, system design, and data engineering.",
   },
   {
-    date: "Feb 2021 - Mar 2025 · 4 Years",
+    date: "Feb 2021 - Mar 2025 - 4 Years",
     role: "Business Operations Manager & Data Analyst",
-    org: "Independent Business · Self-Managed",
+    org: "Independent Business - Self-Managed",
     desc: "End-to-end operations including inventory control, vendor payments, cash flow, and P&L analysis using Excel and Tally ERP. Built monthly/annual reports, identified purchasing inefficiencies, and performed data-driven forecasting - direct business analytics experience.",
   },
   {
-    date: "2017 · 3 Months",
+    date: "2017 - 3 Months",
     role: "Audit & Financial Data Analyst (Internship)",
     org: "Audit Firm",
     desc: "Gained early exposure to digital accounting systems, Tally workflows, auditing business transactions, reconciling records, and verifying financial data accuracy.",
@@ -112,113 +112,143 @@ export default function HomePage() {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
+    renderer.setClearColor(0xffffff, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    );
-    camera.position.z = 80;
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 92);
 
     const heroRig = new THREE.Group();
-    heroRig.position.set(32, 0, -12);
+    heroRig.position.set(47, 1, -12);
+    heroRig.rotation.set(0.15, -0.18, -0.56);
     scene.add(heroRig);
 
-    const keyLight = new THREE.PointLight(0x7c6dfa, 2.6, 180);
-    keyLight.position.set(28, 24, 36);
+    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xd7dde7, 2.15);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xffffff, 4.8);
+    sunLight.position.set(-26, 38, 58);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(2048, 2048);
+    scene.add(sunLight);
+
+    const keyLight = new THREE.PointLight(0xffffff, 3.4, 190);
+    keyLight.position.set(42, 20, 42);
     scene.add(keyLight);
 
-    const fillLight = new THREE.PointLight(0x22d3a8, 1.8, 150);
-    fillLight.position.set(-42, -20, 28);
+    const fillLight = new THREE.PointLight(0xb9d2ff, 1.4, 150);
+    fillLight.position.set(-48, -24, 30);
     scene.add(fillLight);
 
-    const torusGeo = new THREE.TorusKnotGeometry(11, 2.4, 180, 18, 2, 3);
-    const torusMat = new THREE.MeshBasicMaterial({
-      color: 0x7c6dfa,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.34,
+    const rimMat = new THREE.MeshPhysicalMaterial({
+      color: 0x050505,
+      metalness: 0.62,
+      roughness: 0.18,
+      clearcoat: 1,
+      clearcoatRoughness: 0.08,
+    });
+
+    const torusGeo = new THREE.CylinderGeometry(6.6, 6.6, 45, 96, 1, false);
+    const torusMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf7f8fa,
+      metalness: 0.08,
+      roughness: 0.34,
+      clearcoat: 0.82,
+      clearcoatRoughness: 0.18,
     });
     const torus = new THREE.Mesh(torusGeo, torusMat);
-    torus.rotation.set(0.8, 0.2, 0.4);
+    torus.castShadow = true;
+    torus.receiveShadow = true;
     heroRig.add(torus);
 
-    const coreGeo = new THREE.IcosahedronGeometry(8, 2);
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x22d3a8,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.24,
-    });
+    const capGeo = new THREE.CylinderGeometry(6.72, 6.72, 4.6, 96);
+    const coreGeo = capGeo;
+    const coreMat = rimMat;
     const core = new THREE.Mesh(coreGeo, coreMat);
-    core.position.set(-18, 9, -8);
+    core.position.y = 24.8;
+    core.castShadow = true;
+    core.receiveShadow = true;
     heroRig.add(core);
 
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
+    const bottomCap = new THREE.Mesh(capGeo, rimMat);
+    bottomCap.position.y = -24.8;
+    bottomCap.castShadow = true;
+    bottomCap.receiveShadow = true;
+    heroRig.add(bottomCap);
+
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0x4c46a8,
+      metalness: 0.08,
+      roughness: 0.05,
+      transmission: 0.18,
       transparent: true,
-      opacity: 0.11,
+      opacity: 0.86,
+      clearcoat: 1,
+      clearcoatRoughness: 0.03,
     });
+    const ringMat = glassMat;
     const rings = new THREE.Group();
-    const ringGeos: THREE.TorusGeometry[] = [];
-    [18, 25, 32].forEach((radius, index) => {
-      const ringGeo = new THREE.TorusGeometry(radius, 0.035, 8, 160);
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.set(Math.PI / 2 + index * 0.32, index * 0.5, index * 0.2);
-      rings.add(ring);
-      ringGeos.push(ringGeo);
-    });
+    const ringGeos: THREE.BufferGeometry[] = [];
+    const windowGeo = new THREE.CapsuleGeometry(2.05, 8.6, 12, 36);
+    const glassWindow = new THREE.Mesh(windowGeo, glassMat);
+    glassWindow.position.set(0, -11.5, 6.25);
+    glassWindow.rotation.x = Math.PI / 2;
+    glassWindow.castShadow = true;
+    rings.add(glassWindow);
+    ringGeos.push(windowGeo);
+
+    const upperButtonGeo = new THREE.CapsuleGeometry(1.55, 5.4, 10, 32);
+    const upperButton = new THREE.Mesh(upperButtonGeo, rimMat);
+    upperButton.position.set(-2.45, 17.1, 6.45);
+    upperButton.rotation.x = Math.PI / 2;
+    upperButton.castShadow = true;
+    rings.add(upperButton);
+    ringGeos.push(upperButtonGeo);
+
+    const lowerButton = new THREE.Mesh(upperButtonGeo, rimMat);
+    lowerButton.position.set(2.25, 16.8, 6.45);
+    lowerButton.rotation.x = Math.PI / 2;
+    lowerButton.castShadow = true;
+    rings.add(lowerButton);
     heroRig.add(rings);
 
-    const shardGeo = new THREE.TetrahedronGeometry(2.2, 0);
+    const highlightGeo = new THREE.CapsuleGeometry(0.45, 35, 8, 18);
+    const shardGeo = highlightGeo;
     const shardMat = new THREE.MeshBasicMaterial({
-      color: 0xfa6d6d,
-      wireframe: true,
+      color: 0xffffff,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.36,
     });
     const shards: THREE.Mesh[] = [];
-    for (let i = 0; i < 18; i += 1) {
-      const shard = new THREE.Mesh(shardGeo, shardMat);
-      const angle = (i / 18) * Math.PI * 2;
-      const radius = 18 + Math.random() * 26;
-      shard.position.set(
-        Math.cos(angle) * radius,
-        (Math.random() - 0.5) * 42,
-        Math.sin(angle) * radius - 10,
-      );
-      shard.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-      heroRig.add(shard);
-      shards.push(shard);
-    }
+    const shine = new THREE.Mesh(shardGeo, shardMat);
+    shine.position.set(-3.8, -1, 6.52);
+    shine.rotation.x = Math.PI / 2;
+    heroRig.add(shine);
+    shards.push(shine);
 
-    const count = 3200;
+    const count = 520;
     const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
     const palette = [
-      new THREE.Color(0x7c6dfa),
-      new THREE.Color(0x22d3a8),
-      new THREE.Color(0xfa6d6d),
-      new THREE.Color(0xffffff),
+      new THREE.Color(0xe5e7eb),
+      new THREE.Color(0xcbd5e1),
+      new THREE.Color(0xf8fafc),
     ];
 
     for (let i = 0; i < count; i += 1) {
-      const depth = Math.random() ** 1.6;
-      positions[i * 3] = (Math.random() - 0.5) * (180 + depth * 260);
-      positions[i * 3 + 1] = (Math.random() - 0.5) * (140 + depth * 220);
-      positions[i * 3 + 2] = -180 + depth * 330;
+      positions[i * 3] = 24 + (Math.random() - 0.5) * 120;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 96;
+      positions[i * 3 + 2] = -70 + Math.random() * 55;
       const c = palette[Math.floor(Math.random() * palette.length)];
       colors[i * 3] = c.r;
       colors[i * 3 + 1] = c.g;
       colors[i * 3 + 2] = c.b;
-      sizes[i] = Math.random() * 1.8 + 0.25;
+      sizes[i] = Math.random() * 1.2 + 0.15;
     }
 
     geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
@@ -229,9 +259,8 @@ export default function HomePage() {
       size: 0.72,
       vertexColors: true,
       transparent: true,
-      opacity: 0.68,
+      opacity: 0.3,
       sizeAttenuation: true,
-      blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
 
@@ -239,49 +268,56 @@ export default function HomePage() {
     scene.add(particles);
 
     const lineMat = new THREE.LineBasicMaterial({
-      color: 0x7c6dfa,
+      color: 0xd4dbe6,
       transparent: true,
-      opacity: 0.12,
+      opacity: 0.22,
     });
     const lineGeo = new THREE.BufferGeometry();
     const lineVerts: number[] = [];
 
-    for (let i = 0; i < 150; i += 1) {
-      const ax = (Math.random() - 0.5) * 240;
-      const ay = (Math.random() - 0.5) * 170;
-      const az = (Math.random() - 0.5) * 180;
+    for (let i = 0; i < 34; i += 1) {
+      const ax = 28 + (Math.random() - 0.5) * 86;
+      const ay = (Math.random() - 0.5) * 72;
+      const az = -50 + Math.random() * 22;
       lineVerts.push(ax, ay, az);
       lineVerts.push(
-        ax + (Math.random() - 0.5) * 42,
-        ay + (Math.random() - 0.5) * 42,
-        az + (Math.random() - 0.5) * 36,
+        ax + (Math.random() - 0.5) * 14,
+        ay + (Math.random() - 0.5) * 14,
+        az + (Math.random() - 0.5) * 8,
       );
     }
 
     lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
     scene.add(new THREE.LineSegments(lineGeo, lineMat));
 
-    const quantumGeos: THREE.BufferGeometry[] = [];
+    const planeGeo = new THREE.PlaneGeometry(150, 90);
+    const planeMat = new THREE.ShadowMaterial({ color: 0x0f172a, opacity: 0.1 });
+    const shadowPlane = new THREE.Mesh(planeGeo, planeMat);
+    shadowPlane.position.set(31, -30, -20);
+    shadowPlane.rotation.x = -Math.PI / 2;
+    shadowPlane.receiveShadow = true;
+    scene.add(shadowPlane);
+
+    const quantumGeos: THREE.BufferGeometry[] = [planeGeo];
     const quantumMats: THREE.LineBasicMaterial[] = [];
     const quantumWaves: THREE.Line[] = [];
-    for (let wave = 0; wave < 7; wave += 1) {
+    for (let wave = 0; wave < 2; wave += 1) {
       const waveGeo = new THREE.BufferGeometry();
-      const wavePositions = new Float32Array(180 * 3);
-      for (let i = 0; i < 180; i += 1) {
-        const t = i / 179;
-        const x = (t - 0.5) * 190;
-        const y = Math.sin(t * Math.PI * 6 + wave * 0.8) * (8 + wave * 1.4);
-        const z = Math.cos(t * Math.PI * 4 + wave) * 18 - 52 + wave * 8;
+      const wavePositions = new Float32Array(90 * 3);
+      for (let i = 0; i < 90; i += 1) {
+        const t = i / 89;
+        const x = 8 + (t - 0.5) * 110;
+        const y = Math.sin(t * Math.PI * 2 + wave * 0.8) * 3 + (wave - 0.5) * 8;
+        const z = -58 + wave * 6;
         wavePositions[i * 3] = x;
-        wavePositions[i * 3 + 1] = y + (wave - 3) * 9;
+        wavePositions[i * 3 + 1] = y;
         wavePositions[i * 3 + 2] = z;
       }
       waveGeo.setAttribute("position", new THREE.BufferAttribute(wavePositions, 3));
       const waveMat = new THREE.LineBasicMaterial({
-        color: wave % 2 === 0 ? 0x22d3a8 : 0x7c6dfa,
+        color: 0xd7dee8,
         transparent: true,
-        opacity: 0.16,
-        blending: THREE.AdditiveBlending,
+        opacity: 0.14,
       });
       const waveLine = new THREE.Line(waveGeo, waveMat);
       waveLine.rotation.y = wave * 0.18;
@@ -324,27 +360,25 @@ export default function HomePage() {
     const animate = () => {
       animationId = requestAnimationFrame(animate);
       frame += 0.003;
-      particles.rotation.y = frame * 0.1 + mouseX * 0.8;
-      particles.rotation.x = frame * 0.04 + mouseY * 0.5;
-      heroRig.rotation.y = frame * 0.9 + mouseX * 1.5;
-      heroRig.rotation.x = Math.sin(frame * 1.8) * 0.08 + mouseY;
-      torus.rotation.x += 0.0035;
-      torus.rotation.z += 0.002;
-      core.rotation.y -= 0.004;
-      core.rotation.x += 0.002;
-      rings.rotation.z -= 0.0025;
-      rings.rotation.x = Math.sin(frame * 2) * 0.18;
+      particles.rotation.y = frame * 0.03 + mouseX * 0.22;
+      particles.rotation.x = frame * 0.015 + mouseY * 0.16;
+      heroRig.rotation.x = 0.15 + Math.sin(frame * 1.2) * 0.025 + mouseY * 0.16;
+      heroRig.rotation.y = -0.18 + mouseX * 0.28;
+      heroRig.rotation.z = -0.56 + Math.sin(frame * 1.6) * 0.012;
+      torus.rotation.y = Math.sin(frame * 1.25) * 0.018;
+      core.rotation.y = torus.rotation.y;
+      bottomCap.rotation.y = torus.rotation.y;
+      rings.rotation.y = torus.rotation.y;
       quantumWaves.forEach((wave, index) => {
-        wave.rotation.y += 0.0018 + index * 0.00012;
-        wave.rotation.x = Math.sin(frame * 2.4 + index) * 0.08 + mouseY * 0.2;
-        wave.position.z = Math.sin(frame * 3 + index) * 4;
+        wave.rotation.y = Math.sin(frame * 1.5 + index) * 0.015;
+        wave.rotation.x = Math.sin(frame * 1.4 + index) * 0.018;
+        wave.position.z = Math.sin(frame * 2 + index) * 1.5;
       });
       shards.forEach((shard, index) => {
-        shard.rotation.x += 0.003 + index * 0.00008;
-        shard.rotation.y -= 0.002;
+        (shard.material as THREE.Material).opacity = 0.28 + Math.sin(frame * 4 + index) * 0.08;
       });
-      camera.position.x += (mouseX * 18 - camera.position.x) * 0.035;
-      camera.position.y += (-mouseY * 12 - camera.position.y) * 0.035;
+      camera.position.x += (mouseX * 10 - camera.position.x) * 0.035;
+      camera.position.y += (-mouseY * 7 - camera.position.y) * 0.035;
       camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
     };
@@ -481,6 +515,7 @@ export default function HomePage() {
       shardMat.dispose();
       quantumGeos.forEach((waveGeo) => waveGeo.dispose());
       quantumMats.forEach((waveMat) => waveMat.dispose());
+      planeMat.dispose();
     };
   }, []);
 
@@ -512,16 +547,16 @@ export default function HomePage() {
               <span>Gupta</span>
             </h1>
             <p className="hero-role">
-              <span className="highlight">Full-Stack Engineer</span> · Backend Systems · Data Analyst
+              <span className="highlight">Full-Stack Engineer</span> - Backend Systems - Data Analyst
             </p>
             <p className="hero-desc">
               Building scalable multi-vendor platforms, ML pipelines, and analytics-driven systems.
               From inventory intelligence to production AWS deployments - end-to-end ownership.
             </p>
             <div className="hero-ctas">
-              <a href="#projects" className="btn btn-primary">View Projects ↓</a>
-              <a href="https://github.com/anmolguptanpj" target="_blank" className="btn btn-ghost">GitHub →</a>
-              <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn →</a>
+              <a href="#projects" className="btn btn-primary">View Projects</a>
+              <a href="https://github.com/anmolguptanpj" target="_blank" className="btn btn-ghost">GitHub</a>
+              <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn</a>
             </div>
           </div>
         </div>
@@ -619,7 +654,7 @@ export default function HomePage() {
         <div className="container">
           <div className="contact-grid">
             <div className="contact-text">
-              <div className="section-tag"> // 005</div>
+              <div className="section-tag">{"// 005"}</div>
               <h2 className="contact-title">Let&apos;s Build Something</h2>
               <p className="contact-subtitle">
                 Open to full-stack engineering roles, data analyst positions, and freelance projects.
@@ -628,10 +663,10 @@ export default function HomePage() {
             </div>
             <div>
               <div className="contact-links">
-                <ContactLink icon="📧" label="Email" value="anmolguptanpj282@gmail.com" href="mailto:anmolguptanpj282@gmail.com" />
-                <ContactLink icon="🐙" label="GitHub" value="github.com/anmolguptanpj" href="https://github.com/anmolguptanpj" />
-                <ContactLink icon="💼" label="LinkedIn" value="linkedin.com/in/itheanmolgupta" href="https://www.linkedin.com/in/itheanmolgupta/" />
-                <ContactLink icon="🌐" label="Portfolio" value="anmolgupta-two.vercel.app" href="https://anmolgupta-two.vercel.app/" />
+                <ContactLink icon="@" label="Email" value="anmolguptanpj282@gmail.com" href="mailto:anmolguptanpj282@gmail.com" />
+                <ContactLink icon="GH" label="GitHub" value="github.com/anmolguptanpj" href="https://github.com/anmolguptanpj" />
+                <ContactLink icon="IN" label="LinkedIn" value="linkedin.com/in/itheanmolgupta" href="https://www.linkedin.com/in/itheanmolgupta/" />
+                <ContactLink icon="WWW" label="Portfolio" value="anmolgupta-two.vercel.app" href="https://anmolgupta-two.vercel.app/" />
               </div>
               <ResumeSection />
             </div>
@@ -640,8 +675,8 @@ export default function HomePage() {
       </section>
 
       <footer>
-        <span>© 2025 Anmol Gupta</span>
-        <span className="footer-stack">Built with Next.js · Enhanced with GSAP & Three.js</span>
+        <span>(c) 2025 Anmol Gupta</span>
+        <span className="footer-stack">Built with Next.js - Enhanced with GSAP & Three.js</span>
       </footer>
     </>
   );
@@ -728,7 +763,7 @@ function FeaturedProject() {
   return (
     <article className="project-card featured">
       <div className="project-body">
-        <p className="project-num">Project 01 · Featured</p>
+        <p className="project-num">Project 01 - Featured</p>
         <h3 className="project-title">Multi-Vendor Ecommerce Platform</h3>
         <p className="project-desc">
           Production-grade multi-vendor platform with three isolated control centers - Admin,
@@ -745,9 +780,9 @@ function FeaturedProject() {
         <TechTags tags={["React.js", "Next.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma", "Redis", "AWS EC2", "NGINX"]} />
         <ProjectLinks
           links={[
-            ["Backend ↗", "https://github.com/anmolguptanpj/EcommerceV1_Backend"],
-            ["Customer Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendCustomer"],
-            ["Supplier Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendSupplier"],
+            ["Backend ->", "https://github.com/anmolguptanpj/EcommerceV1_Backend"],
+            ["Customer Frontend ->", "https://github.com/anmolguptanpj/Ecommercev1_FrontendCustomer"],
+            ["Supplier Frontend ->", "https://github.com/anmolguptanpj/Ecommercev1_FrontendSupplier"],
           ]}
         />
       </div>
@@ -903,21 +938,21 @@ function ContactLink({
 function ResumeSection() {
   return (
     <div className="resume-section">
-      <p className="resume-title">// Resumes</p>
+      <p className="resume-title">{"// Resumes"}</p>
       <div className="resume-list">
         <ResumeCard
-          icon="💻"
+          icon="SE"
           title="Software Engineer"
-          meta="Full-Stack · Backend · Systems"
-          desc="MERN · Next.js · FastAPI · AWS EC2 · PostgreSQL · Redis · RBAC · System Architecture"
+          meta="Full-Stack - Backend - Systems"
+          desc="MERN - Next.js - FastAPI - AWS EC2 - PostgreSQL - Redis - RBAC - System Architecture"
           href="/resume/AnmolGuptaSoftwareEnginner.pdf"
           download="Anmol_Gupta_SoftwareEngineer_Resume.pdf"
         />
         <ResumeCard
-          icon="📊"
+          icon="DA"
           title="Data Analyst"
-          meta="Python · SQL · ML · BI"
-          desc="Pandas · Scikit-learn · XGBoost · Power BI · ETL Pipelines · MySQL · Streamlit"
+          meta="Python - SQL - ML - BI"
+          desc="Pandas - Scikit-learn - XGBoost - Power BI - ETL Pipelines - MySQL - Streamlit"
           href="/resume/AnmolGuptaDataAnalyst.pdf"
           download="Anmol_Gupta_DataAnalyst_Resume.pdf"
           data
@@ -955,8 +990,8 @@ function ResumeCard({
       </div>
       <div className="resume-desc">{desc}</div>
       <div className="resume-actions">
-        <a href={href} target="_blank" className="btn btn-primary">View ↗</a>
-        <a href={href} download={download} className="btn btn-ghost">Download ↓</a>
+        <a href={href} target="_blank" className="btn btn-primary">View</a>
+        <a href={href} download={download} className="btn btn-ghost">Download</a>
       </div>
     </div>
   );
