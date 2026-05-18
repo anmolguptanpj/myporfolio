@@ -1,207 +1,660 @@
-"use client"
-import Image from "next/image";
-import Link from "next/link";
-import htmlImg from "@/public/html5-01-svgrepo-com.svg"
-import cssImg from"@/public/css-3-svgrepo-com.svg"
-import nodeImg from"@/public/node-js-svgrepo-com.svg"
-import reactImg from"@/public/react-logo-svgrepo-com.svg"
-import jsImg from"@/public/javascript-svgrepo-com.svg"
-import mongoImg from"@/public/mongodb-logo-svgrepo-com.svg"
-import nextImg from"@/public/nextjs-fill-svgrepo-com.svg"
-import tailImg from"@/public/tailwind-svgrepo-com.svg"
-import expressImg from"@/public/express-svgrepo-com.svg"
-import mongooseImg from"@/public/Mongoose.js.svg"
-import gmailImg from "@/public/svgviewer-output.svg"
-import githubImg from "@/public/github-svgrepo-com.svg"
-import linkedImg from "@/public/linkedin-svgrepo-com.svg"
-import postgreImg from "@/public/postgresql-logo-svgrepo-com.svg"
-import prismaImg from "@/public/light-prisma-svgrepo-com.svg"
-import { useState } from "react";
+"use client";
 
+import { useEffect } from "react";
+import * as THREE from "three";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const skills = [
+  ["frontend", "⚛️", "React.js"],
+  ["frontend", "▲", "Next.js"],
+  ["frontend", "🎨", "Tailwind CSS"],
+  ["frontend", "📄", "HTML5 / CSS3"],
+  ["backend", "🟩", "Node.js"],
+  ["backend", "🚂", "Express.js"],
+  ["backend", "⚡", "FastAPI"],
+  ["backend", "🟨", "JavaScript"],
+  ["backend", "🔷", "TypeScript"],
+  ["backend", "🐍", "Python"],
+  ["data", "🐼", "Pandas / NumPy"],
+  ["data", "🤖", "Scikit-learn"],
+  ["data", "🚀", "XGBoost"],
+  ["data", "📊", "Power BI"],
+  ["data", "📈", "Matplotlib / Seaborn"],
+  ["data", "🌊", "Streamlit"],
+  ["infra", "🍃", "MongoDB"],
+  ["infra", "🐘", "PostgreSQL"],
+  ["infra", "🗄️", "MySQL / SQLite"],
+  ["infra", "◈", "Prisma"],
+  ["infra", "☁️", "AWS EC2"],
+  ["infra", "🔴", "Redis"],
+  ["infra", "🌐", "NGINX / SSL"],
+  ["infra", "🐙", "Git / GitHub"],
+];
 
-export default function Home() {
-
-  const linkS = "hover:underline"
-  const resume = "bg-blue-500 w-40 text-center hover:bg-green-500 px-2 rounded-xl"
-  const [message,setMessage] = useState("")
-
-  
-   const portfolio = {
-    name:"Anmol Gupta",
-    education: "BCA First Semester running",
-    skills: {
-    "HTML":htmlImg,
-    "CSS": cssImg,
-    "JavaScript":jsImg,
-    "Node.js":nodeImg,
-    "React.js":reactImg,
-    "MongoDB":mongoImg,
-    "Next.js":nextImg,
-    "Tailwind CSS":tailImg,
-    "Express.js":expressImg,
-    "Mongoose":mongooseImg,
-    "PostgreSQL":postgreImg,
-    "Prisma":prismaImg
-    },
-  projects:{
-    "projectOne":{
-      "Title":"TODO With Authentication ",
-      "Features":["JWT-based authentication",
-  "Access token and refresh token implementation",
-  "Secure user login and session handling",
-  "Create, read, update, and delete (CRUD) todos",
-  "Authenticated routes protection",
-  "Proper state management using React Context",
-  "Responsive UI built with Tailwind CSS"],
-      "Tech Stack":["MongoDB","React","Express","UseContext","Tailwind CSS"],
-      "Live Demo":["https://todo-v2-frontend.vercel.app/"],
-      "View Image":"/project1"
-    },
-    "projectTwo":{
-      "Title":"FULL STACK MVP for  ECOMMERCE MULTI-SELLER APP",
-      "Features":["Three separate frontend applications: Admin, Supplier, Customer",
-  "Role-based access control (RBAC)",
-  "Email-based account activation for suppliers and staff",
-  "Create, edit, and manage products, suppliers, and staff accounts",
-  "JWT authentication with access and refresh tokens",
-  "Token handling via localStorage and secure cookies",
-  "MongoDB pagination, population, and virtualization",
-  "Media handling using Cloudinary",
-  "Next.js-based sales full-stack application",
-  "Authentication using HTTP-only cookies",
-  "UI built with shadcn/ui for login and signup flows",
-  "MongoDB with Mongoose ORM for products and suppliers",
-  "PostgreSQL with Prisma ORM for customers, carts, and orders",
-  "Deployed on Amazon EC2",
-  "Migrated backend from HTTP to HTTPS",
-  "Configured Nginx and Certbot (SSL) on Amazon Linux VM"
-
-      ],
-      "Tech Stack":["MongoDB","React","Express.js","Redux.js","Next.js","PostgreSql","Prizma"],
-      "Live Demo":["https://codex-swart-sigma.vercel.app/"],
-      "View Image":"/project2"
-    }
+const projects = [
+  {
+    num: "Project 02",
+    title: "TODO with JWT Authentication",
+    desc: "Full-stack todo app featuring access/refresh token JWT auth, React Context state management, protected routes, and complete CRUD operations.",
+    tags: ["React.js", "MongoDB", "Express.js", "JWT", "Tailwind CSS"],
+    links: [
+      ["todo-v2-frontend.vercel.app ↗", "https://todo-v2-frontend.vercel.app/"],
+      ["Backend ↗", "https://github.com/anmolguptanpj/TodoV2_backend"],
+    ],
   },
-  "about":`I’m Anmol Gupta, originally from Nepal and currently in Delhi for higher studies and a tech-focused career.
-  
-  Before entering development, I spent 3.5 years running a food wholesale business and operated a cloud-kitchen for 6 months. After March 2025, I shifted fully into software development to build a long-term career in technology.`
-  ,
-  contact: {
-  Gmail: {"mailto:anmolguptanpj282@gmail.com":gmailImg},
-  Github: {"https://github.com/anmolguptanpj":githubImg},
-  Linkedin:{"https://www.linkedin.com/in/itheanmolgupta/":linkedImg}
-}
+  {
+    num: "Project 03",
+    title: "Credit Risk ML System",
+    desc: "Production ML pipeline on German Credit Dataset. Benchmarked 4 classifiers (XGBoost 67%), exported LabelEncoder artifacts, full Streamlit deployment.",
+    tags: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Poetry"],
+    links: [["GitHub ↗", "https://github.com/anmolguptanpj/Credit_risk_analysis_-_ml_model"]],
+  },
+  {
+    num: "Project 04",
+    title: "Vendor ETL & Analytics Pipeline",
+    desc: "Scalable ETL pipeline ingesting 2GB+ multi-source datasets. Advanced SQL KPI analysis across 100+ vendors. Delivered 15+ BI dashboards with actionable insights.",
+    tags: ["Python", "SQLAlchemy", "Pandas", "MySQL", "Seaborn"],
+    links: [["GitHub ↗", "https://github.com/anmolguptanpj/Vendor_performance_analysis"]],
+  },
+  {
+    num: "Project 05",
+    title: "FastAPI Image & Video Sharing App",
+    desc: "Backend-focused CRUD media platform supporting image and video uploads with structured post management. Features FastAPI native auth, SQLAlchemy ORM with SQLite, Pydantic schema validation, and a Streamlit frontend for rapid interaction.",
+    tags: ["Python", "FastAPI", "SQLite", "SQLAlchemy", "Pydantic", "Streamlit"],
+    links: [["GitHub ↗", "https://github.com/anmolguptanpj/FastAPI-Backend-project"]],
+  },
+];
 
-   }
+const experience = [
+  {
+    date: "2025 - Present",
+    role: "Software Engineer (Self-Directed)",
+    org: "Open Source & Personal Projects · Delhi, India",
+    desc: "Building production full-stack systems - multi-vendor ecommerce platforms, ML pipelines, FastAPI backends. Rapidly advancing through backend architecture, system design, and data engineering.",
+  },
+  {
+    date: "Feb 2021 - Mar 2025 · 4 Years",
+    role: "Business Operations Manager & Data Analyst",
+    org: "Independent Business · Self-Managed",
+    desc: "End-to-end operations including inventory control, vendor payments, cash flow, and P&L analysis using Excel and Tally ERP. Built monthly/annual reports, identified purchasing inefficiencies, and performed data-driven forecasting - direct business analytics experience.",
+  },
+  {
+    date: "2017 · 3 Months",
+    role: "Audit & Financial Data Analyst (Internship)",
+    org: "Audit Firm",
+    desc: "Gained early exposure to digital accounting systems, Tally workflows, auditing business transactions, reconciling records, and verifying financial data accuracy.",
+  },
+];
+
+export default function HomePage() {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000,
+    );
+    camera.position.z = 80;
+
+    const count = 2200;
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
+    const palette = [
+      new THREE.Color(0x7c6dfa),
+      new THREE.Color(0x22d3a8),
+      new THREE.Color(0xfa6d6d),
+      new THREE.Color(0xffffff),
+    ];
+
+    for (let i = 0; i < count; i += 1) {
+      positions[i * 3] = (Math.random() - 0.5) * 200;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      colors[i * 3] = c.r;
+      colors[i * 3 + 1] = c.g;
+      colors[i * 3 + 2] = c.b;
+      sizes[i] = Math.random() * 1.5 + 0.2;
+    }
+
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    geo.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+    const mat = new THREE.PointsMaterial({
+      size: 0.6,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.55,
+      sizeAttenuation: true,
+    });
+
+    const particles = new THREE.Points(geo, mat);
+    scene.add(particles);
+
+    const lineMat = new THREE.LineBasicMaterial({
+      color: 0x7c6dfa,
+      transparent: true,
+      opacity: 0.07,
+    });
+    const lineGeo = new THREE.BufferGeometry();
+    const lineVerts: number[] = [];
+
+    for (let i = 0; i < 80; i += 1) {
+      const ax = (Math.random() - 0.5) * 180;
+      const ay = (Math.random() - 0.5) * 180;
+      const az = (Math.random() - 0.5) * 60;
+      lineVerts.push(ax, ay, az);
+      lineVerts.push(
+        ax + (Math.random() - 0.5) * 30,
+        ay + (Math.random() - 0.5) * 30,
+        az,
+      );
+    }
+
+    lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
+    scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let frame = 0;
+    let animationId = 0;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseX = (event.clientX / window.innerWidth - 0.5) * 0.4;
+      mouseY = (event.clientY / window.innerHeight - 0.5) * 0.4;
+
+      const glow = document.getElementById("cursor-glow");
+      if (glow) {
+        glow.style.left = `${event.clientX}px`;
+        glow.style.top = `${event.clientY}px`;
+      }
+    };
+
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    const handleScroll = () => {
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const pct = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      const progress = document.getElementById("scroll-progress");
+      if (progress) progress.style.width = `${pct}%`;
+    };
+
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+      frame += 0.003;
+      particles.rotation.y = frame * 0.08 + mouseX;
+      particles.rotation.x = frame * 0.03 + mouseY;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousemove", handleMouseMove);
+
+    const hero = gsap.timeline({ delay: 0.2 });
+    hero
+      .to(".hero-tag", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
+      .to(".hero-name", { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
+      .to(".hero-role", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+      .to(".hero-desc", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+      .to(".hero-ctas", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
+
+    gsap.utils.toArray<HTMLElement>(".section-header").forEach((el) => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 85%" },
+      });
+    });
+
+    gsap.to(".skill-card", {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      stagger: 0.04,
+      ease: "power2.out",
+      scrollTrigger: { trigger: "#skills-grid", start: "top 80%" },
+    });
+
+    gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: i * 0.1,
+        ease: "power2.out",
+        scrollTrigger: { trigger: card, start: "top 85%" },
+      });
+    });
+
+    gsap.to(".timeline", {
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".timeline", start: "top 80%" },
+    });
+
+    gsap.to(".about-text", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".about-text", start: "top 80%" },
+    });
+
+    gsap.to(".stats-grid", {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      delay: 0.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".stats-grid", start: "top 80%" },
+    });
+
+    gsap.to(".contact-text", {
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".contact-text", start: "top 80%" },
+    });
+
+    gsap.to(".contact-links", {
+      opacity: 1,
+      duration: 0.7,
+      delay: 0.15,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".contact-links", start: "top 85%" },
+    });
+
+    gsap.to(".resume-section", {
+      opacity: 1,
+      duration: 0.7,
+      delay: 0.3,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".resume-section", start: "top 88%" },
+    });
+
+    const tabButtons = document.querySelectorAll<HTMLButtonElement>(".tab-btn");
+    const handleTabClick = (event: Event) => {
+      const btn = event.currentTarget as HTMLButtonElement;
+      tabButtons.forEach((item) => item.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter;
+
+      document.querySelectorAll<HTMLElement>(".skill-card").forEach((card) => {
+        const show = filter === "all" || card.dataset.cat === filter;
+        gsap.to(card, {
+          opacity: show ? 1 : 0.15,
+          scale: show ? 1 : 0.95,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+    };
+
+    tabButtons.forEach((btn) => btn.addEventListener("click", handleTabClick));
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousemove", handleMouseMove);
+      tabButtons.forEach((btn) => btn.removeEventListener("click", handleTabClick));
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      renderer.dispose();
+      geo.dispose();
+      mat.dispose();
+      lineGeo.dispose();
+      lineMat.dispose();
+    };
+  }, []);
 
   return (
-  <div>
-  <header className="flex flex-row w-full  border-b h-16 pl-10 pr-10  ">
-    <div className="lg:w-[20vw] w-full font-bold text-3xl shadow-amber-200 flex flex-row justify-center items-center">{portfolio.name}</div>
-    <div className=" lg:flex hidden flex-row items-center justify-end w-[80vw]">
-      <ul className=" flex font-bold flex-row gap-5">
-          <li><Link className={linkS} href={"#skills"}>Skills</Link></li>
-          <li><Link className={linkS} href={"#projects"}>Projects</Link></li>
-          <li><Link className={linkS} href={"#about"}>About</Link></li>
-          <li><Link className={linkS} href={"#contacts"}>Contact Me</Link></li>
-      </ul>
-    </div>
-  </header>
+    <>
+      <div className="scroll-indicator" id="scroll-progress" />
+      <div className="cursor-glow" id="cursor-glow" />
+      <div className="noise" />
+      <canvas id="hero-canvas" />
 
-  <section className="text-center mb-5 mt-16 px-5">
-        <h1 className="text-4xl font-bold">Hi, I’m {portfolio.name}</h1>
-        <p className="mt-3 text-gray-300 text-lg">
-          Full Stack Developer • MERN • Next.js 
-        </p>
+      <nav id="navbar">
+        <div className="nav-logo">AG</div>
+        <ul className="nav-links">
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <section id="hero">
+        <div className="container">
+          <div className="hero-content">
+            <div className="hero-tag">Available for opportunities</div>
+            <h1 className="hero-name">
+              <span>Anmol</span>
+              <span>Gupta</span>
+            </h1>
+            <p className="hero-role">
+              <span className="highlight">Full-Stack Engineer</span> · Backend Systems · Data Analyst
+            </p>
+            <p className="hero-desc">
+              Building scalable multi-vendor platforms, ML pipelines, and analytics-driven systems.
+              From inventory intelligence to production AWS deployments - end-to-end ownership.
+            </p>
+            <div className="hero-ctas">
+              <a href="#projects" className="btn btn-primary">View Projects ↓</a>
+              <a href="https://github.com/anmolguptanpj" target="_blank" className="btn btn-ghost">GitHub →</a>
+              <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn →</a>
+            </div>
+          </div>
+        </div>
       </section>
-  
 
-  <div id="skills" className="w-full text-center text-2xl border-t pt-10 ">Skills</div>
-  <div className="flex flex-row flex-wrap justify-center ">
-          {Object.entries(portfolio.skills).map(([key,value])=>(
-            <div className=" flex flex-col lg:m-5 p-5 m-2  bg-white justify-center items-center border-3 border-amber-300 pt-5  rounded-xl " key={key}>
-            <div className=" lg:w-20 w-20 h-20   lg:h-20"><Image src={value} className="object-contain" alt={`${key}`}/></div>
-            <div className="flex justify-baseline flex-wrap items-baseline text-xs text-black mt-2">{key}</div>
+      <section id="skills">
+        <div className="container">
+          <SectionHeader tag="// 001" title="Technical Skills" />
+          <div className="skills-tabs">
+            {[
+              ["all", "All"],
+              ["frontend", "Frontend"],
+              ["backend", "Backend"],
+              ["data", "Data & ML"],
+              ["infra", "Infra & DB"],
+            ].map(([filter, label]) => (
+              <button
+                key={filter}
+                className={`tab-btn ${filter === "all" ? "active" : ""}`}
+                data-filter={filter}
+                type="button"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <div className="skills-grid" id="skills-grid">
+            {skills.map(([cat, icon, name]) => (
+              <div className="skill-card" data-cat={cat} key={`${cat}-${name}`}>
+                <span className="skill-icon">{icon}</span>
+                <div className="skill-name">{name}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        ))}
-  </div>
-  
-  <div className="flex border-t flex-col pt-10 items-center justify-center text-xs lg:text-[1rem]  ">
-    <p id="projects" className="text-2xl">Projects</p>
-    {Object.entries(portfolio.projects).map(([key,p])=>(
-     <div key={key} className="lg:w-[80%] p-3 justify-center items-center  mb-10  flex flex-col  w-full">
-      <div className="  rounded-xl border-3 w-full p-5 lg:w-[60%] flex justify-center items-center  " key={key}>
-     <div className="">
-     <div><p className=" font-bold text-center">{p.Title}</p></div>
-     
-     <div className="pt-5 pb-5">   <p className="font-bold">Features</p><ul className=" pl-6 list-disc">{(p.Features).map((f)=>(<li key={f}>{f}</li>))}</ul></div>
-     <div className="">
-     <p>Tech stack : </p>
-      <ul className=" list-disc  list-inside ">{(p["Tech Stack"]).map((l)=>(<li className="pl-3" key={l}>{l}</li>))}</ul></div>
-      <p className="mt-6">Live demo:</p>
-     <div className="flex flex-col"><ul className="pl-6 list-disc">{(p["Live Demo"]).map((k)=>(<Link className="hover:underline" href={k} key={k}><li>{k}</li></Link>))}</ul></div>
-     <div  className=" mt-6 w-full  flex flex-row justify-center" ><Link  className="px-1 py-0.5 rounded-2xl w-45 text-center bg-blue-500 focus:bg-green-500 hover:bg-green-500" href={p["View Image"]}>View Screenshots</Link></div>
-     </div>
-       
-     </div>
-     </div>
-    ))}
-  </div>
+      </section>
 
-
-       <div className="flex flex-col justify-center border-t pt-10 items-center ">
-        <p id="about" className="text-2xl">About</p>
-    
-       <div className="lg:w-[47%] mt-5 text-xs pt-5 lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex flex-col   p-5">
-        
-        <p  className="">  {portfolio.about}</p>
+      <section id="projects">
+        <div className="container">
+          <SectionHeader tag="// 002" title="Projects" />
+          <div className="projects-grid">
+            <FeaturedProject />
+            {projects.map((project) => (
+              <article className="project-card" key={project.title}>
+                <p className="project-num">{project.num}</p>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.desc}</p>
+                <TechTags tags={project.tags} />
+                <ProjectLinks links={project.links} />
+              </article>
+            ))}
+          </div>
         </div>
-       </div>
+      </section>
 
-       <div className="flex flex-col justify-center border-t pt-10 items-center ">
-        <p className="text-2xl">Resume</p>
-       <div className="lg:w-[47%] mt-5  text-xs pt-5 lg:text-[1rem] w-[93vw] mb-10 border-2 justify-center  rounded-xl flex gap-3   p-5">
-
-              <a
-              className={resume}
-               href= "/resume/resumeAnmolGupta.pdf"
-               target="_blank"
-               rel="noopener norefferrer"
-              > View Resume </a>
-              <a
-              className={resume}
-               href= "/resume/resumeAnmolGupta.pdf"
-               download="Anmol_Gupta_Resume.pdf"
-               onClick={()=>{setMessage("Resume has been added to downloads.");
-                setTimeout(()=>setMessage(""),2000)
-
-               }
-              }
-              >Download Resume</a>
+      <section id="experience">
+        <div className="container">
+          <SectionHeader tag="// 003" title="Experience" />
+          <div className="timeline">
+            {experience.map((item) => (
+              <div className="timeline-item" key={item.role}>
+                <p className="timeline-date">{item.date}</p>
+                <p className="timeline-role">{item.role}</p>
+                <p className="timeline-org">{item.org}</p>
+                <p className="timeline-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="h-10">{message && <p>{message}</p>}</div>
+      </section>
 
-       </div>
+      <section id="about">
+        <div className="container">
+          <SectionHeader tag="// 004" title="About" />
+          <div className="about-grid">
+            <div className="about-text">
+              <p>Originally from Nepal, currently in Delhi pursuing a BCA from IGNOU and an intensive software engineering career.</p>
+              <p>Before entering development, I spent 3.5 years running a food wholesale business and operated a cloud-kitchen for 6 months. After March 2025, I shifted fully into software - drawn by the conviction that building unlocks new problems worth solving.</p>
+              <p>I bring rare domain depth: real financial data, vendor analytics, and inventory intelligence shaped my engineering instincts before I ever wrote a production API. That context drives how I build systems - not just technically correct, but operationally grounded.</p>
+            </div>
+            <div className="stats-grid">
+              <Stat num="4+" label="Years business data experience" />
+              <Stat num="2GB+" label="Datasets processed in ETL pipelines" />
+              <Stat num="3" label="Production deployments (AWS, Vercel)" />
+              <Stat num="12+" label="Technologies in active use" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <footer id="contacts" className="border-t gap-2 p-10 flex flex-col lg:flex-row justify-center items-center">
-    <p className="lg:text-3xl " >Contact me :</p>
-  <div  className="flex gap-10 flex-col  lg:flex-row  ">{Object.entries(portfolio.contact).map(([platform,details])=>
-  {const[[link,icon]] = Object.entries(details);
-    return(<div className="border-2 w-auto text-black bg-slate-300  h-10 p-3 hover:bg-white  rounded-xl text-xl flex flex-col  lg:flex-row justify-center items-center  " key={platform}>
-     
-      <div ><Link href={link}> 
-      <div className="flex justify-center items-center gap-2"><Image  className="w-10 h-5 object-contain" src={icon} alt={`${icon}`}/>
-      <div className="">{platform}</div>
-      
+      <section id="contact">
+        <div className="container">
+          <div className="contact-grid">
+            <div className="contact-text">
+              <div className="section-tag"> // 005</div>
+              <h2 className="contact-title">Let&apos;s Build Something</h2>
+              <p className="contact-subtitle">
+                Open to full-stack engineering roles, data analyst positions, and freelance projects.
+                Based in Delhi, open to remote.
+              </p>
+            </div>
+            <div>
+              <div className="contact-links">
+                <ContactLink icon="📧" label="Email" value="anmolguptanpj282@gmail.com" href="mailto:anmolguptanpj282@gmail.com" />
+                <ContactLink icon="🐙" label="GitHub" value="github.com/anmolguptanpj" href="https://github.com/anmolguptanpj" />
+                <ContactLink icon="💼" label="LinkedIn" value="linkedin.com/in/itheanmolgupta" href="https://www.linkedin.com/in/itheanmolgupta/" />
+                <ContactLink icon="🌐" label="Portfolio" value="anmolgupta-two.vercel.app" href="https://anmolgupta-two.vercel.app/" />
+              </div>
+              <ResumeSection />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2025 Anmol Gupta</span>
+        <span className="footer-stack">Built with Next.js · Enhanced with GSAP & Three.js</span>
+      </footer>
+    </>
+  );
+}
+
+function SectionHeader({ tag, title }: { tag: string; title: string }) {
+  return (
+    <div className="section-header">
+      <p className="section-tag">{tag}</p>
+      <h2 className="section-title">{title}</h2>
+    </div>
+  );
+}
+
+function TechTags({ tags }: { tags: string[] }) {
+  return (
+    <div className="tech-tags">
+      {tags.map((tag) => (
+        <span className="tech-tag" key={tag}>{tag}</span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectLinks({ links }: { links: string[][] }) {
+  return (
+    <div className="project-links">
+      {links.map(([label, href]) => (
+        <a className="project-link" href={href} target="_blank" key={href}>{label}</a>
+      ))}
+    </div>
+  );
+}
+
+function FeaturedProject() {
+  return (
+    <article className="project-card featured">
+      <div className="project-body">
+        <p className="project-num">Project 01 · Featured</p>
+        <h3 className="project-title">Multi-Vendor Ecommerce Platform</h3>
+        <p className="project-desc">
+          Production-grade multi-vendor platform with three isolated control centers - Admin,
+          Supplier, and Customer portals. Features RBAC, event-driven workflows,
+          aggregation-heavy MongoDB analytics, and AWS EC2 + NGINX deployment.
+        </p>
+        <ul className="feature-list">
+          <li>Role-based access control across all frontends</li>
+          <li>Inventory audit system - single source of truth for P&L, vendor analysis</li>
+          <li>Dual DB: MongoDB (products) + PostgreSQL/Prisma (orders, carts)</li>
+          <li>AWS EC2 + NGINX + Certbot SSL production deployment</li>
+          <li>Cloudinary media handling, Redis caching</li>
+        </ul>
+        <TechTags tags={["React.js", "Next.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma", "Redis", "AWS EC2", "NGINX"]} />
+        <ProjectLinks
+          links={[
+            ["codex-swart-sigma.vercel.app ↗", "https://codex-swart-sigma.vercel.app/"],
+            ["Backend ↗", "https://github.com/anmolguptanpj/EcommerceV1_Backend"],
+            ["Customer Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendCustomer"],
+            ["Supplier Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendSupplier"],
+          ]}
+        />
       </div>
-      </Link></div>
-    </div>)
-  })}</div>
-</footer>
+      <div className="project-visual">
+        <div className="architecture-title">Architecture</div>
+        <div className="architecture-stack">
+          <div className="architecture-node architecture-admin">Admin Panel</div>
+          <div className="architecture-node architecture-supplier">Supplier Panel</div>
+          <div className="architecture-node architecture-customer">Customer Portal</div>
+          <div className="architecture-line" />
+          <div className="architecture-node architecture-backend">Express.js Backend</div>
+          <div className="architecture-db-grid">
+            <div className="architecture-small">MongoDB</div>
+            <div className="architecture-small">PostgreSQL</div>
+          </div>
+          <div className="architecture-deploy">AWS EC2 · NGINX · SSL</div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
-  
-  </div>
+function Stat({ num, label }: { num: string; label: string }) {
+  return (
+    <div className="stat-card">
+      <div className="stat-num">{num}</div>
+      <div className="stat-label">{label}</div>
+    </div>
+  );
+}
 
+function ContactLink({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: string;
+  label: string;
+  value: string;
+  href: string;
+}) {
+  return (
+    <a className="contact-link-card" href={href} target={href.startsWith("http") ? "_blank" : undefined}>
+      <div className="contact-link-icon">{icon}</div>
+      <div>
+        <div className="contact-link-label">{label}</div>
+        <div className="contact-link-value">{value}</div>
+      </div>
+    </a>
+  );
+}
+
+function ResumeSection() {
+  return (
+    <div className="resume-section">
+      <p className="resume-title">// Resumes</p>
+      <div className="resume-list">
+        <ResumeCard
+          icon="💻"
+          title="Software Engineer"
+          meta="Full-Stack · Backend · Systems"
+          desc="MERN · Next.js · FastAPI · AWS EC2 · PostgreSQL · Redis · RBAC · System Architecture"
+          href="/resume/AnmolGuptaSoftwareEnginner.pdf"
+          download="Anmol_Gupta_SoftwareEngineer_Resume.pdf"
+        />
+        <ResumeCard
+          icon="📊"
+          title="Data Analyst"
+          meta="Python · SQL · ML · BI"
+          desc="Pandas · Scikit-learn · XGBoost · Power BI · ETL Pipelines · MySQL · Streamlit"
+          href="/resume/AnmolGuptaDataAnalyst.pdf"
+          download="Anmol_Gupta_DataAnalyst_Resume.pdf"
+          data
+        />
+      </div>
+    </div>
+  );
+}
+
+function ResumeCard({
+  icon,
+  title,
+  meta,
+  desc,
+  href,
+  download,
+  data = false,
+}: {
+  icon: string;
+  title: string;
+  meta: string;
+  desc: string;
+  href: string;
+  download: string;
+  data?: boolean;
+}) {
+  return (
+    <div className={`resume-card ${data ? "data" : ""}`}>
+      <div className="resume-head">
+        <div className="resume-icon">{icon}</div>
+        <div>
+          <div className="resume-name">{title}</div>
+          <div className="resume-meta">{meta}</div>
+        </div>
+      </div>
+      <div className="resume-desc">{desc}</div>
+      <div className="resume-actions">
+        <a href={href} target="_blank" className="btn btn-primary">View ↗</a>
+        <a href={href} download={download} className="btn btn-ghost">Download ↓</a>
+      </div>
+    </div>
   );
 }
