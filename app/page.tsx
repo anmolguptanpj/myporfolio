@@ -39,7 +39,6 @@ const projects = [
     desc: "Full-stack todo app featuring access/refresh token JWT auth, React Context state management, protected routes, and complete CRUD operations.",
     tags: ["React.js", "MongoDB", "Express.js", "JWT", "Tailwind CSS"],
     links: [
-      ["todo-v2-frontend.vercel.app ↗", "https://todo-v2-frontend.vercel.app/"],
       ["Backend ↗", "https://github.com/anmolguptanpj/TodoV2_backend"],
     ],
   },
@@ -640,7 +639,6 @@ function FeaturedProject() {
         <TechTags tags={["React.js", "Next.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma", "Redis", "AWS EC2", "NGINX"]} />
         <ProjectLinks
           links={[
-            ["codex-swart-sigma.vercel.app ↗", "https://codex-swart-sigma.vercel.app/"],
             ["Backend ↗", "https://github.com/anmolguptanpj/EcommerceV1_Backend"],
             ["Customer Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendCustomer"],
             ["Supplier Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendSupplier"],
