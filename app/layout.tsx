@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-import { Space_Mono, Syne } from "next/font/google";
+import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 
-const spaceMono = Space_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--body-font",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
   variable: "--mono-font",
 });
 
-const syne = Syne({
+const sora = Sora({
   subsets: ["latin"],
-  weight: ["400", "600", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--display-font",
 });
 
@@ -25,7 +31,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${spaceMono.variable} ${syne.variable}`}>{children}</body>
+      <body className={`${inter.variable} ${jetBrainsMono.variable} ${sora.variable}`}>{children}</body>
     </html>
   );
 }

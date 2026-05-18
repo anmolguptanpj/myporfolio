@@ -5,46 +5,60 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const skills = [
-  ["frontend", "⚛️", "React.js"],
-  ["frontend", "▲", "Next.js"],
-  ["frontend", "🎨", "Tailwind CSS"],
-  ["frontend", "📄", "HTML5 / CSS3"],
-  ["backend", "🟩", "Node.js"],
-  ["backend", "🚂", "Express.js"],
-  ["backend", "⚡", "FastAPI"],
-  ["backend", "🟨", "JavaScript"],
-  ["backend", "🔷", "TypeScript"],
-  ["backend", "🐍", "Python"],
-  ["data", "🐼", "Pandas / NumPy"],
-  ["data", "🤖", "Scikit-learn"],
-  ["data", "🚀", "XGBoost"],
-  ["data", "📊", "Power BI"],
-  ["data", "📈", "Matplotlib / Seaborn"],
-  ["data", "🌊", "Streamlit"],
-  ["infra", "🍃", "MongoDB"],
-  ["infra", "🐘", "PostgreSQL"],
-  ["infra", "🗄️", "MySQL / SQLite"],
-  ["infra", "◈", "Prisma"],
-  ["infra", "☁️", "AWS EC2"],
-  ["infra", "🔴", "Redis"],
-  ["infra", "🌐", "NGINX / SSL"],
-  ["infra", "🐙", "Git / GitHub"],
+type Skill = {
+  cat: "frontend" | "backend" | "data" | "infra";
+  logoUrl?: string;
+  customLogo?: "aws" | "powerbi" | "xgboost";
+  name: string;
+};
+
+const skills: Skill[] = [
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/react/61DAFB", name: "React.js" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/nextdotjs/FFFFFF", name: "Next.js" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/tailwindcss/38BDF8", name: "Tailwind CSS" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/html5/E34F26", name: "HTML5" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/css/663399", name: "CSS3" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/nodedotjs/5FA04E", name: "Node.js" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/express/FFFFFF", name: "Express.js" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/fastapi/009688", name: "FastAPI" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/javascript/F7DF1E", name: "JavaScript" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/typescript/3178C6", name: "TypeScript" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/python/3776AB", name: "Python" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/pandas/FFFFFF", name: "Pandas" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/numpy/4DABCF", name: "NumPy" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/scikitlearn/F7931E", name: "Scikit-learn" },
+  { cat: "data", customLogo: "xgboost", name: "XGBoost" },
+  { cat: "data", customLogo: "powerbi", name: "Power BI" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/plotly/3F4F75", name: "Matplotlib" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/streamlit/FF4B4B", name: "Streamlit" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/mongodb/47A248", name: "MongoDB" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/postgresql/4169E1", name: "PostgreSQL" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/mysql/4479A1", name: "MySQL" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/sqlite/003B57", name: "SQLite" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/prisma/FFFFFF", name: "Prisma" },
+  { cat: "infra", customLogo: "aws", name: "AWS EC2" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/redis/FF4438", name: "Redis" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/nginx/009639", name: "NGINX" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/git/F05032", name: "Git" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/github/FFFFFF", name: "GitHub" },
 ];
 
 const projects = [
   {
     num: "Project 02",
     title: "TODO with JWT Authentication",
+    visual: "todo",
     desc: "Full-stack todo app featuring access/refresh token JWT auth, React Context state management, protected routes, and complete CRUD operations.",
     tags: ["React.js", "MongoDB", "Express.js", "JWT", "Tailwind CSS"],
     links: [
+      ["todo-v2-frontend.vercel.app ↗", "https://todo-v2-frontend.vercel.app/"],
       ["Backend ↗", "https://github.com/anmolguptanpj/TodoV2_backend"],
     ],
   },
   {
     num: "Project 03",
     title: "Credit Risk ML System",
+    visual: "ml",
     desc: "Production ML pipeline on German Credit Dataset. Benchmarked 4 classifiers (XGBoost 67%), exported LabelEncoder artifacts, full Streamlit deployment.",
     tags: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Poetry"],
     links: [["GitHub ↗", "https://github.com/anmolguptanpj/Credit_risk_analysis_-_ml_model"]],
@@ -52,6 +66,7 @@ const projects = [
   {
     num: "Project 04",
     title: "Vendor ETL & Analytics Pipeline",
+    visual: "etl",
     desc: "Scalable ETL pipeline ingesting 2GB+ multi-source datasets. Advanced SQL KPI analysis across 100+ vendors. Delivered 15+ BI dashboards with actionable insights.",
     tags: ["Python", "SQLAlchemy", "Pandas", "MySQL", "Seaborn"],
     links: [["GitHub ↗", "https://github.com/anmolguptanpj/Vendor_performance_analysis"]],
@@ -59,6 +74,7 @@ const projects = [
   {
     num: "Project 05",
     title: "FastAPI Image & Video Sharing App",
+    visual: "media",
     desc: "Backend-focused CRUD media platform supporting image and video uploads with structured post management. Features FastAPI native auth, SQLAlchemy ORM with SQLite, Pydantic schema validation, and a Streamlit frontend for rapid interaction.",
     tags: ["Python", "FastAPI", "SQLite", "SQLAlchemy", "Pydantic", "Streamlit"],
     links: [["GitHub ↗", "https://github.com/anmolguptanpj/FastAPI-Backend-project"]],
@@ -245,6 +261,37 @@ export default function HomePage() {
     lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
     scene.add(new THREE.LineSegments(lineGeo, lineMat));
 
+    const quantumGeos: THREE.BufferGeometry[] = [];
+    const quantumMats: THREE.LineBasicMaterial[] = [];
+    const quantumWaves: THREE.Line[] = [];
+    for (let wave = 0; wave < 7; wave += 1) {
+      const waveGeo = new THREE.BufferGeometry();
+      const wavePositions = new Float32Array(180 * 3);
+      for (let i = 0; i < 180; i += 1) {
+        const t = i / 179;
+        const x = (t - 0.5) * 190;
+        const y = Math.sin(t * Math.PI * 6 + wave * 0.8) * (8 + wave * 1.4);
+        const z = Math.cos(t * Math.PI * 4 + wave) * 18 - 52 + wave * 8;
+        wavePositions[i * 3] = x;
+        wavePositions[i * 3 + 1] = y + (wave - 3) * 9;
+        wavePositions[i * 3 + 2] = z;
+      }
+      waveGeo.setAttribute("position", new THREE.BufferAttribute(wavePositions, 3));
+      const waveMat = new THREE.LineBasicMaterial({
+        color: wave % 2 === 0 ? 0x22d3a8 : 0x7c6dfa,
+        transparent: true,
+        opacity: 0.16,
+        blending: THREE.AdditiveBlending,
+      });
+      const waveLine = new THREE.Line(waveGeo, waveMat);
+      waveLine.rotation.y = wave * 0.18;
+      waveLine.rotation.z = (wave - 3) * 0.04;
+      scene.add(waveLine);
+      quantumGeos.push(waveGeo);
+      quantumMats.push(waveMat);
+      quantumWaves.push(waveLine);
+    }
+
     let mouseX = 0;
     let mouseY = 0;
     let frame = 0;
@@ -287,6 +334,11 @@ export default function HomePage() {
       core.rotation.x += 0.002;
       rings.rotation.z -= 0.0025;
       rings.rotation.x = Math.sin(frame * 2) * 0.18;
+      quantumWaves.forEach((wave, index) => {
+        wave.rotation.y += 0.0018 + index * 0.00012;
+        wave.rotation.x = Math.sin(frame * 2.4 + index) * 0.08 + mouseY * 0.2;
+        wave.position.z = Math.sin(frame * 3 + index) * 4;
+      });
       shards.forEach((shard, index) => {
         shard.rotation.x += 0.003 + index * 0.00008;
         shard.rotation.y -= 0.002;
@@ -427,6 +479,8 @@ export default function HomePage() {
       ringMat.dispose();
       shardGeo.dispose();
       shardMat.dispose();
+      quantumGeos.forEach((waveGeo) => waveGeo.dispose());
+      quantumMats.forEach((waveMat) => waveMat.dispose());
     };
   }, []);
 
@@ -434,6 +488,7 @@ export default function HomePage() {
     <>
       <div className="scroll-indicator" id="scroll-progress" />
       <div className="cursor-glow" id="cursor-glow" />
+      <div className="quantum-field" />
       <div className="noise" />
       <canvas id="hero-canvas" />
 
@@ -494,10 +549,12 @@ export default function HomePage() {
             ))}
           </div>
           <div className="skills-grid" id="skills-grid">
-            {skills.map(([cat, icon, name]) => (
-              <div className="skill-card" data-cat={cat} key={`${cat}-${name}`}>
-                <span className="skill-icon">{icon}</span>
-                <div className="skill-name">{name}</div>
+            {skills.map((skill) => (
+              <div className="skill-card" data-cat={skill.cat} key={`${skill.cat}-${skill.name}`}>
+                <span className="skill-icon" aria-hidden="true">
+                  <SkillLogo skill={skill} />
+                </span>
+                <div className="skill-name">{skill.name}</div>
               </div>
             ))}
           </div>
@@ -512,6 +569,7 @@ export default function HomePage() {
             {projects.map((project) => (
               <article className="project-card" key={project.title}>
                 <p className="project-num">{project.num}</p>
+                <ProjectPreview variant={project.visual} />
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.desc}</p>
                 <TechTags tags={project.tags} />
@@ -589,6 +647,54 @@ export default function HomePage() {
   );
 }
 
+function SkillLogo({ skill }: { skill: Skill }) {
+  if (skill.customLogo === "powerbi") {
+    return (
+      <svg className="skill-logo skill-logo-svg" viewBox="0 0 64 64" role="img">
+        <rect x="9" y="31" width="10" height="20" rx="4" fill="#F2C811" />
+        <rect x="23" y="23" width="10" height="28" rx="4" fill="#DCAA00" />
+        <rect x="37" y="13" width="10" height="38" rx="4" fill="#F2C811" />
+        <rect x="51" y="7" width="10" height="44" rx="4" fill="#F6D84A" />
+      </svg>
+    );
+  }
+
+  if (skill.customLogo === "aws") {
+    return (
+      <svg className="skill-logo skill-logo-svg aws-logo" viewBox="0 0 72 48" role="img">
+        <path d="M16 30c8 6 25 9 39 1" fill="none" stroke="#FF9900" strokeWidth="5" strokeLinecap="round" />
+        <path d="M48 32l10-2-5 9" fill="none" stroke="#FF9900" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M11 22c2-7 8-11 15-10 4-6 13-8 20-4 6 3 9 8 9 14 5 1 9 5 9 11 0 7-6 12-13 12H18C10 45 4 40 4 33c0-5 3-9 7-11Z" fill="none" stroke="#FFB84D" strokeWidth="3.5" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (skill.customLogo === "xgboost") {
+    return (
+      <svg className="skill-logo skill-logo-svg" viewBox="0 0 64 64" role="img">
+        <path d="M13 49 29 10h8L21 49h-8Z" fill="#FF7A18" />
+        <path d="M27 49 43 10h8L35 49h-8Z" fill="#FFB000" />
+        <path d="M15 18h37l-4 9H11l4-9Z" fill="#22D3A8" />
+        <path d="M20 37h34l-4 9H16l4-9Z" fill="#7C6DFA" />
+      </svg>
+    );
+  }
+
+  if (!skill.logoUrl) return null;
+
+  return (
+    <img
+      className="skill-logo"
+      src={skill.logoUrl}
+      alt=""
+      loading="lazy"
+      onError={(event) => {
+        event.currentTarget.closest(".skill-card")?.classList.add("logo-missing");
+      }}
+    />
+  );
+}
+
 function SectionHeader({ tag, title }: { tag: string; title: string }) {
   return (
     <div className="section-header">
@@ -639,6 +745,7 @@ function FeaturedProject() {
         <TechTags tags={["React.js", "Next.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma", "Redis", "AWS EC2", "NGINX"]} />
         <ProjectLinks
           links={[
+            ["codex-swart-sigma.vercel.app ↗", "https://codex-swart-sigma.vercel.app/"],
             ["Backend ↗", "https://github.com/anmolguptanpj/EcommerceV1_Backend"],
             ["Customer Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendCustomer"],
             ["Supplier Frontend ↗", "https://github.com/anmolguptanpj/Ecommercev1_FrontendSupplier"],
@@ -646,21 +753,120 @@ function FeaturedProject() {
         />
       </div>
       <div className="project-visual">
-        <div className="architecture-title">Architecture</div>
-        <div className="architecture-stack">
-          <div className="architecture-node architecture-admin">Admin Panel</div>
-          <div className="architecture-node architecture-supplier">Supplier Panel</div>
-          <div className="architecture-node architecture-customer">Customer Portal</div>
-          <div className="architecture-line" />
-          <div className="architecture-node architecture-backend">Express.js Backend</div>
-          <div className="architecture-db-grid">
-            <div className="architecture-small">MongoDB</div>
-            <div className="architecture-small">PostgreSQL</div>
+        <div className="architecture-title">Live Product System</div>
+        <div className="preview-browser">
+          <div className="preview-topbar">
+            <span className="preview-dot" />
+            <span className="preview-dot" />
+            <span className="preview-dot" />
           </div>
-          <div className="architecture-deploy">AWS EC2 · NGINX · SSL</div>
+          <div className="preview-body">
+            <div className="preview-sidebar">
+              <div className="preview-line accent" />
+              <div className="preview-line" />
+              <div className="preview-line short" />
+              <div className="preview-line" />
+              <div className="preview-line short" />
+            </div>
+            <div className="preview-panel">
+              <div className="preview-metrics">
+                <span className="preview-metric" />
+                <span className="preview-metric" />
+                <span className="preview-metric" />
+              </div>
+              <div className="preview-bars">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </article>
+  );
+}
+
+function ProjectPreview({ variant }: { variant: string }) {
+  return (
+    <div className={`project-preview preview-${variant}`}>
+      <div className="preview-browser">
+        <div className="preview-topbar">
+          <span className="preview-dot" />
+          <span className="preview-dot" />
+          <span className="preview-dot" />
+        </div>
+        {variant === "todo" && (
+          <div className="preview-body">
+            <div className="preview-panel">
+              <div className="preview-line accent" />
+              <div className="preview-check" />
+              <div className="preview-check" />
+              <div className="preview-check" />
+              <div className="preview-check" />
+            </div>
+          </div>
+        )}
+        {variant === "ml" && (
+          <div className="preview-body">
+            <div className="preview-panel">
+              <div className="preview-bars">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+            <div className="preview-heatmap">
+              {Array.from({ length: 15 }).map((_, index) => (
+                <span key={index} />
+              ))}
+            </div>
+          </div>
+        )}
+        {variant === "etl" && (
+          <div className="preview-body">
+            <div className="preview-sidebar">
+              <div className="preview-line accent" />
+              <div className="preview-line" />
+              <div className="preview-line short" />
+            </div>
+            <div className="preview-panel">
+              <div className="preview-metrics">
+                <span className="preview-metric" />
+                <span className="preview-metric" />
+                <span className="preview-metric" />
+              </div>
+              <div className="preview-bars">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          </div>
+        )}
+        {variant === "media" && (
+          <div className="preview-body">
+            <div className="preview-media-grid">
+              <span className="preview-thumb" />
+              <span className="preview-thumb" />
+              <span className="preview-thumb" />
+              <span className="preview-thumb" />
+            </div>
+            <div className="preview-panel">
+              <div className="preview-line accent" />
+              <div className="preview-line" />
+              <div className="preview-line short" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
