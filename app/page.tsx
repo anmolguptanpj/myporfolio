@@ -98,6 +98,7 @@ export default function HomePage() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -108,7 +109,80 @@ export default function HomePage() {
     );
     camera.position.z = 80;
 
-    const count = 2200;
+    const heroRig = new THREE.Group();
+    heroRig.position.set(32, 0, -12);
+    scene.add(heroRig);
+
+    const keyLight = new THREE.PointLight(0x7c6dfa, 2.6, 180);
+    keyLight.position.set(28, 24, 36);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.PointLight(0x22d3a8, 1.8, 150);
+    fillLight.position.set(-42, -20, 28);
+    scene.add(fillLight);
+
+    const torusGeo = new THREE.TorusKnotGeometry(11, 2.4, 180, 18, 2, 3);
+    const torusMat = new THREE.MeshBasicMaterial({
+      color: 0x7c6dfa,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.34,
+    });
+    const torus = new THREE.Mesh(torusGeo, torusMat);
+    torus.rotation.set(0.8, 0.2, 0.4);
+    heroRig.add(torus);
+
+    const coreGeo = new THREE.IcosahedronGeometry(8, 2);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x22d3a8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.24,
+    });
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    core.position.set(-18, 9, -8);
+    heroRig.add(core);
+
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.11,
+    });
+    const rings = new THREE.Group();
+    const ringGeos: THREE.TorusGeometry[] = [];
+    [18, 25, 32].forEach((radius, index) => {
+      const ringGeo = new THREE.TorusGeometry(radius, 0.035, 8, 160);
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.set(Math.PI / 2 + index * 0.32, index * 0.5, index * 0.2);
+      rings.add(ring);
+      ringGeos.push(ringGeo);
+    });
+    heroRig.add(rings);
+
+    const shardGeo = new THREE.TetrahedronGeometry(2.2, 0);
+    const shardMat = new THREE.MeshBasicMaterial({
+      color: 0xfa6d6d,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.2,
+    });
+    const shards: THREE.Mesh[] = [];
+    for (let i = 0; i < 18; i += 1) {
+      const shard = new THREE.Mesh(shardGeo, shardMat);
+      const angle = (i / 18) * Math.PI * 2;
+      const radius = 18 + Math.random() * 26;
+      shard.position.set(
+        Math.cos(angle) * radius,
+        (Math.random() - 0.5) * 42,
+        Math.sin(angle) * radius - 10,
+      );
+      shard.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+      heroRig.add(shard);
+      shards.push(shard);
+    }
+
+    const count = 3200;
     const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -121,14 +195,15 @@ export default function HomePage() {
     ];
 
     for (let i = 0; i < count; i += 1) {
-      positions[i * 3] = (Math.random() - 0.5) * 200;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+      const depth = Math.random() ** 1.6;
+      positions[i * 3] = (Math.random() - 0.5) * (180 + depth * 260);
+      positions[i * 3 + 1] = (Math.random() - 0.5) * (140 + depth * 220);
+      positions[i * 3 + 2] = -180 + depth * 330;
       const c = palette[Math.floor(Math.random() * palette.length)];
       colors[i * 3] = c.r;
       colors[i * 3 + 1] = c.g;
       colors[i * 3 + 2] = c.b;
-      sizes[i] = Math.random() * 1.5 + 0.2;
+      sizes[i] = Math.random() * 1.8 + 0.25;
     }
 
     geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
@@ -136,11 +211,13 @@ export default function HomePage() {
     geo.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
     const mat = new THREE.PointsMaterial({
-      size: 0.6,
+      size: 0.72,
       vertexColors: true,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.68,
       sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
 
     const particles = new THREE.Points(geo, mat);
@@ -149,20 +226,20 @@ export default function HomePage() {
     const lineMat = new THREE.LineBasicMaterial({
       color: 0x7c6dfa,
       transparent: true,
-      opacity: 0.07,
+      opacity: 0.12,
     });
     const lineGeo = new THREE.BufferGeometry();
     const lineVerts: number[] = [];
 
-    for (let i = 0; i < 80; i += 1) {
-      const ax = (Math.random() - 0.5) * 180;
-      const ay = (Math.random() - 0.5) * 180;
-      const az = (Math.random() - 0.5) * 60;
+    for (let i = 0; i < 150; i += 1) {
+      const ax = (Math.random() - 0.5) * 240;
+      const ay = (Math.random() - 0.5) * 170;
+      const az = (Math.random() - 0.5) * 180;
       lineVerts.push(ax, ay, az);
       lineVerts.push(
-        ax + (Math.random() - 0.5) * 30,
-        ay + (Math.random() - 0.5) * 30,
-        az,
+        ax + (Math.random() - 0.5) * 42,
+        ay + (Math.random() - 0.5) * 42,
+        az + (Math.random() - 0.5) * 36,
       );
     }
 
@@ -201,8 +278,23 @@ export default function HomePage() {
     const animate = () => {
       animationId = requestAnimationFrame(animate);
       frame += 0.003;
-      particles.rotation.y = frame * 0.08 + mouseX;
-      particles.rotation.x = frame * 0.03 + mouseY;
+      particles.rotation.y = frame * 0.1 + mouseX * 0.8;
+      particles.rotation.x = frame * 0.04 + mouseY * 0.5;
+      heroRig.rotation.y = frame * 0.9 + mouseX * 1.5;
+      heroRig.rotation.x = Math.sin(frame * 1.8) * 0.08 + mouseY;
+      torus.rotation.x += 0.0035;
+      torus.rotation.z += 0.002;
+      core.rotation.y -= 0.004;
+      core.rotation.x += 0.002;
+      rings.rotation.z -= 0.0025;
+      rings.rotation.x = Math.sin(frame * 2) * 0.18;
+      shards.forEach((shard, index) => {
+        shard.rotation.x += 0.003 + index * 0.00008;
+        shard.rotation.y -= 0.002;
+      });
+      camera.position.x += (mouseX * 18 - camera.position.x) * 0.035;
+      camera.position.y += (-mouseY * 12 - camera.position.y) * 0.035;
+      camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
     };
 
@@ -328,6 +420,14 @@ export default function HomePage() {
       mat.dispose();
       lineGeo.dispose();
       lineMat.dispose();
+      torusGeo.dispose();
+      torusMat.dispose();
+      coreGeo.dispose();
+      coreMat.dispose();
+      ringGeos.forEach((ringGeo) => ringGeo.dispose());
+      ringMat.dispose();
+      shardGeo.dispose();
+      shardMat.dispose();
     };
   }, []);
 

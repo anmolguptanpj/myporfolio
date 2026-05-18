@@ -2,15 +2,15 @@
 
 :root {
   --bg: #050508;
-  --surface: #0d0d14;
-  --surface2: #13131e;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.13);
+  --surface: rgba(15,15,24,0.92);
+  --surface2: rgba(22,22,34,0.94);
+  --border: rgba(255,255,255,0.11);
+  --border2: rgba(255,255,255,0.2);
   --accent: #7c6dfa;
   --accent2: #22d3a8;
   --accent3: #fa6d6d;
-  --text: #e8e8f0;
-  --muted: #6b6b80;
+  --text: #f4f4fb;
+  --muted: #a4a4b8;
   --mono: var(--mono-font);
   --display: var(--display-font);
 }
@@ -18,12 +18,31 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
+  background:
+    linear-gradient(120deg, rgba(124,109,250,0.16), rgba(34,211,168,0.10), rgba(250,109,109,0.11), rgba(5,5,8,0.96));
+  background-size: 260% 260%;
   color: var(--text);
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
   overflow-x: hidden;
+  animation: colorShift 18s ease-in-out infinite;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(5,5,8,0.52), rgba(5,5,8,0.88) 55%, rgba(5,5,8,0.96));
+}
+
+@keyframes colorShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 #hero-canvas {
@@ -54,7 +73,7 @@ nav {
 .nav-logo {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -69,7 +88,7 @@ nav {
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: color 0.2s;
@@ -99,7 +118,7 @@ section {
 
 .hero-tag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -113,7 +132,7 @@ section {
 .hero-name {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(3.6rem, 9vw, 6.8rem);
   line-height: 1;
   letter-spacing: -0.03em;
   margin-bottom: 1rem;
@@ -128,8 +147,8 @@ section {
 }
 
 .hero-role {
-  font-size: 1rem;
-  color: var(--muted);
+  font-size: clamp(1.12rem, 2vw, 1.38rem);
+  color: #d3d3e2;
   margin-bottom: 2rem;
   opacity: 0;
 }
@@ -137,9 +156,9 @@ section {
 .hero-role .highlight { color: var(--accent); }
 
 .hero-desc {
-  max-width: 500px;
-  color: rgba(232,232,240,0.65);
-  font-size: 0.88rem;
+  max-width: 620px;
+  color: rgba(244,244,251,0.84);
+  font-size: 1.04rem;
   line-height: 1.8;
   margin-bottom: 2.5rem;
   opacity: 0;
@@ -159,7 +178,7 @@ section {
   padding: 0.75rem 1.6rem;
   border-radius: 8px;
   font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.94rem;
   letter-spacing: 0.05em;
   cursor: pointer;
   text-decoration: none;
@@ -195,7 +214,7 @@ section {
 }
 
 .section-tag {
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
@@ -205,7 +224,7 @@ section {
 .section-title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2.3rem, 5vw, 3.35rem);
   letter-spacing: -0.02em;
   color: var(--text);
 }
@@ -241,6 +260,7 @@ section {
   transition: all 0.25s;
   opacity: 0;
   transform: translateY(20px);
+  backdrop-filter: blur(10px);
 }
 
 .skill-card:hover {
@@ -257,8 +277,8 @@ section {
 }
 
 .skill-name {
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-size: 0.9rem;
+  color: #c8c8d8;
   letter-spacing: 0.05em;
 }
 
@@ -276,7 +296,7 @@ section {
   background: transparent;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s;
   letter-spacing: 0.05em;
@@ -306,6 +326,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  backdrop-filter: blur(12px);
 }
 
 .project-card:hover {
@@ -324,7 +345,7 @@ section {
 .project-card.featured .project-body { flex: 1; }
 
 .project-num {
-  font-size: 0.7rem;
+  font-size: 0.84rem;
   color: var(--accent);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -333,15 +354,15 @@ section {
 .project-title {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.42rem;
   color: var(--text);
   line-height: 1.3;
   margin-bottom: 0.5rem;
 }
 
 .project-desc {
-  font-size: 0.82rem;
-  color: rgba(232,232,240,0.55);
+  font-size: 1rem;
+  color: rgba(244,244,251,0.76);
   line-height: 1.7;
 }
 
@@ -353,7 +374,7 @@ section {
 }
 
 .tech-tag {
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   padding: 0.25rem 0.65rem;
   border-radius: 100px;
   border: 1px solid var(--border2);
@@ -369,7 +390,7 @@ section {
 }
 
 .project-link {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: var(--accent2);
   text-decoration: none;
   letter-spacing: 0.05em;
@@ -471,8 +492,8 @@ section {
 }
 
 .feature-list {
-  font-size: 0.78rem;
-  color: rgba(232,232,240,0.5);
+  font-size: 0.95rem;
+  color: rgba(244,244,251,0.72);
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -494,8 +515,8 @@ section {
 }
 
 .about-text {
-  font-size: 0.9rem;
-  color: rgba(232,232,240,0.7);
+  font-size: 1.06rem;
+  color: rgba(244,244,251,0.82);
   line-height: 1.9;
   opacity: 0;
 }
@@ -515,6 +536,7 @@ section {
   border-radius: 12px;
   padding: 1.5rem;
   transition: border-color 0.2s;
+  backdrop-filter: blur(10px);
 }
 
 .stat-card:hover { border-color: var(--accent); }
@@ -529,7 +551,7 @@ section {
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: var(--muted);
   letter-spacing: 0.05em;
 }
@@ -568,7 +590,7 @@ section {
 }
 
 .timeline-date {
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   color: var(--accent2);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -578,20 +600,20 @@ section {
 .timeline-role {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.24rem;
   color: var(--text);
   margin-bottom: 0.25rem;
 }
 
 .timeline-org {
-  font-size: 0.8rem;
+  font-size: 0.98rem;
   color: var(--muted);
   margin-bottom: 0.75rem;
 }
 
 .timeline-desc {
-  font-size: 0.82rem;
-  color: rgba(232,232,240,0.55);
+  font-size: 1rem;
+  color: rgba(244,244,251,0.74);
   line-height: 1.7;
 }
 
@@ -600,7 +622,7 @@ section {
 .contact-title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 2.5rem;
+  font-size: clamp(2.6rem, 5vw, 3.5rem);
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin-bottom: 1rem;
@@ -610,7 +632,7 @@ section {
 }
 
 .contact-subtitle {
-  font-size: 0.85rem;
+  font-size: 1.05rem;
   color: var(--muted);
   line-height: 1.7;
   max-width: 380px;
@@ -635,6 +657,7 @@ section {
   text-decoration: none;
   color: var(--text);
   transition: all 0.2s;
+  backdrop-filter: blur(10px);
 }
 
 .contact-link-card:hover {
@@ -655,12 +678,12 @@ section {
 }
 
 .contact-link-label {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   color: var(--muted);
 }
 
 .contact-link-value {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--text);
   overflow-wrap: anywhere;
 }
@@ -672,10 +695,11 @@ section {
   border: 1px solid var(--border);
   border-radius: 12px;
   opacity: 0;
+  backdrop-filter: blur(12px);
 }
 
 .resume-title {
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
@@ -730,14 +754,14 @@ section {
 .resume-card.data .resume-icon { background: rgba(34,211,168,0.12); }
 
 .resume-name {
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: var(--text);
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .resume-meta {
-  font-size: 0.72rem;
+  font-size: 0.84rem;
   color: var(--accent);
   letter-spacing: 0.06em;
 }
@@ -745,8 +769,8 @@ section {
 .resume-card.data .resume-meta { color: var(--accent2); }
 
 .resume-desc {
-  font-size: 0.76rem;
-  color: rgba(232,232,240,0.45);
+  font-size: 0.92rem;
+  color: rgba(244,244,251,0.66);
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -775,7 +799,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   position: relative;
   z-index: 10;
   gap: 1rem;
