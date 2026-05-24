@@ -30,23 +30,23 @@
 
 /* ── Light Theme ── */
 [data-theme="light"] {
-  --bg: #f5f5f7; /* Apple warm gray */
+  --bg: #f0f4f9; /* Premium ice blue / soft mist background */
   --surface: #ffffff; /* Floating white cards */
-  --surface2: #e8e8ed;
-  --surface-wash: #e8e8ed;
-  --border: rgba(0, 0, 0, 0.05); /* Softer borders for clean layout */
-  --border2: rgba(0, 0, 0, 0.08);
+  --surface2: #e1e7f0;
+  --surface-wash: #e1e7f0; /* Alternating section wash */
+  --border: rgba(0, 113, 227, 0.05); /* Softer borders matching the bluish tone */
+  --border2: rgba(0, 113, 227, 0.08);
   --accent: #0071e3;
   --accent2: #1d8348;
   --accent3: #e8590c;
-  --ink: #1d1d1f;
-  --text: #1d1d1f;
-  --muted: #515154;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02); /* Elevated soft shadows */
-  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 5px rgba(0, 0, 0, 0.03);
-  --nav-bg: rgba(245, 245, 247, 0.72);
-  --card-hover: #fafafa;
-  --glow-color: rgba(0, 113, 227, 0.04);
+  --ink: #1d2c3f; /* Deep navy-ink text for superior legibility */
+  --text: #1d2c3f;
+  --muted: #53647c; /* Slate-blue muted text */
+  --shadow: 0 10px 30px rgba(0, 113, 227, 0.04), 0 1px 3px rgba(0, 113, 227, 0.02); /* Soft blue-tinted shadows */
+  --shadow-strong: 0 20px 40px rgba(0, 113, 227, 0.06), 0 1px 5px rgba(0, 113, 227, 0.03);
+  --nav-bg: rgba(240, 244, 249, 0.72);
+  --card-hover: #fafbfc;
+  --glow-color: rgba(0, 113, 227, 0.05);
 }
 
 html { scroll-behavior: smooth; }
