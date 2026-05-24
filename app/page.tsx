@@ -437,10 +437,51 @@ export default function HomePage() {
             </div>
             <div>
               <div className="contact-links">
-                <ContactLink icon="@" label="Email" value="anmolguptanpj282@gmail.com" href="mailto:anmolguptanpj282@gmail.com" />
-                <ContactLink icon="GH" label="GitHub" value="github.com/anmolguptanpj" href="https://github.com/anmolguptanpj" />
-                <ContactLink icon="IN" label="LinkedIn" value="linkedin.com/in/itheanmolgupta" href="https://www.linkedin.com/in/itheanmolgupta/" />
-                <ContactLink icon="WWW" label="Portfolio" value="anmolgupta-two.vercel.app" href="https://anmolgupta-two.vercel.app/" />
+                <ContactLink
+                  icon={
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  }
+                  label="Email"
+                  value="anmolguptanpj282@gmail.com"
+                  href="mailto:anmolguptanpj282@gmail.com"
+                />
+                <ContactLink
+                  icon={
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                    </svg>
+                  }
+                  label="GitHub"
+                  value="github.com/anmolguptanpj"
+                  href="https://github.com/anmolguptanpj"
+                />
+                <ContactLink
+                  icon={
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  }
+                  label="LinkedIn"
+                  value="linkedin.com/in/itheanmolgupta"
+                  href="https://www.linkedin.com/in/itheanmolgupta/"
+                />
+                <ContactLink
+                  icon={
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="2" y1="12" x2="22" y2="12" />
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                  }
+                  label="Portfolio"
+                  value="anmolgupta-two.vercel.app"
+                  href="https://anmolgupta-two.vercel.app/"
+                />
               </div>
               <ResumeSection />
             </div>
@@ -614,9 +655,25 @@ function TechTags({ tags }: { tags: string[] }) {
 function ProjectLinks({ links }: { links: string[][] }) {
   return (
     <div className="project-links">
-      {links.map(([label, href]) => (
-        <a className="project-link" href={href} target="_blank" key={href}>{label}</a>
-      ))}
+      {links.map(([label, href]) => {
+        const isGithub = href.includes("github.com");
+        return (
+          <a className="project-link" href={href} target="_blank" rel="noopener noreferrer" key={href}>
+            {isGithub ? (
+              <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px', flexShrink: 0 }} aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            ) : (
+              <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px', flexShrink: 0 }} aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            )}
+            <span>{label}</span>
+          </a>
+        );
+      })}
     </div>
   );
 }
@@ -781,7 +838,7 @@ function ContactLink({
   value,
   href,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   label: string;
   value: string;
   href: string;
@@ -803,7 +860,13 @@ function ResumeSection() {
       <p className="resume-title">{"// Resumes"}</p>
       <div className="resume-list">
         <ResumeCard
-          icon="SE"
+          icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+              <line x1="14" y1="4" x2="10" y2="20" />
+            </svg>
+          }
           title="Software Engineer"
           meta="Full-Stack - Backend - Systems"
           desc="MERN - Next.js - FastAPI - AWS EC2 - PostgreSQL - Redis - RBAC - System Architecture"
@@ -811,7 +874,13 @@ function ResumeSection() {
           download="Anmol_Gupta_SoftwareEngineer_Resume.pdf"
         />
         <ResumeCard
-          icon="DA"
+          icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          }
           title="Data Analyst"
           meta="Python - SQL - ML - BI"
           desc="Pandas - Scikit-learn - XGBoost - Power BI - ETL Pipelines - MySQL - Streamlit"
@@ -833,7 +902,7 @@ function ResumeCard({
   download,
   data = false,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   meta: string;
   desc: string;

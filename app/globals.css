@@ -965,15 +965,27 @@ section {
 }
 
 .project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.88rem;
   color: var(--accent);
   text-decoration: none;
   letter-spacing: 0;
-  font-weight: 500;
-  transition: color 0.3s;
+  font-weight: 600;
+  transition: all var(--transition);
 }
 
-.project-link:hover { color: #64b5f6; }
+.project-link:hover {
+  color: var(--accent2);
+  transform: translateY(-1px);
+}
+
+.project-link .link-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.2;
+}
 
 /* Featured project visual */
 .project-visual {
