@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,33 +13,33 @@ type Skill = {
 
 const skills: Skill[] = [
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/react/61DAFB", name: "React.js" },
-  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/nextdotjs/111827", name: "Next.js" },
+  { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/nextdotjs/ffffff", name: "Next.js" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/tailwindcss/38BDF8", name: "Tailwind CSS" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/html5/E34F26", name: "HTML5" },
   { cat: "frontend", logoUrl: "https://cdn.simpleicons.org/css/663399", name: "CSS3" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/nodedotjs/5FA04E", name: "Node.js" },
-  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/express/111827", name: "Express.js" },
+  { cat: "backend", logoUrl: "https://cdn.simpleicons.org/express/ffffff", name: "Express.js" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/fastapi/009688", name: "FastAPI" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/javascript/F7DF1E", name: "JavaScript" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/typescript/3178C6", name: "TypeScript" },
   { cat: "backend", logoUrl: "https://cdn.simpleicons.org/python/3776AB", name: "Python" },
-  { cat: "data", logoUrl: "https://cdn.simpleicons.org/pandas/150458", name: "Pandas" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/pandas/E0E0E0", name: "Pandas" },
   { cat: "data", logoUrl: "https://cdn.simpleicons.org/numpy/4DABCF", name: "NumPy" },
   { cat: "data", logoUrl: "https://cdn.simpleicons.org/scikitlearn/F7931E", name: "Scikit-learn" },
   { cat: "data", customLogo: "xgboost", name: "XGBoost" },
   { cat: "data", customLogo: "powerbi", name: "Power BI" },
-  { cat: "data", logoUrl: "https://cdn.simpleicons.org/plotly/3F4F75", name: "Matplotlib" },
+  { cat: "data", logoUrl: "https://cdn.simpleicons.org/plotly/B0B0B0", name: "Matplotlib" },
   { cat: "data", logoUrl: "https://cdn.simpleicons.org/streamlit/FF4B4B", name: "Streamlit" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/mongodb/47A248", name: "MongoDB" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/postgresql/4169E1", name: "PostgreSQL" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/mysql/4479A1", name: "MySQL" },
-  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/sqlite/003B57", name: "SQLite" },
-  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/prisma/2D3748", name: "Prisma" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/sqlite/64B5F6", name: "SQLite" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/prisma/ffffff", name: "Prisma" },
   { cat: "infra", customLogo: "aws", name: "AWS EC2" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/redis/FF4438", name: "Redis" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/nginx/009639", name: "NGINX" },
   { cat: "infra", logoUrl: "https://cdn.simpleicons.org/git/F05032", name: "Git" },
-  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/github/181717", name: "GitHub" },
+  { cat: "infra", logoUrl: "https://cdn.simpleicons.org/github/ffffff", name: "GitHub" },
 ];
 
 const projects = [
@@ -102,6 +102,24 @@ const experience = [
 ];
 
 export default function HomePage() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  // Initialize theme from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
+    if (saved) setTheme(saved);
+  }, []);
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  }, []);
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -126,8 +144,8 @@ export default function HomePage() {
     const hero = gsap.timeline({ delay: 0.2 });
     hero
       .to(".hero-tag", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
-      .to(".hero-name", { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
-      .to(".hero-role", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+      .to(".hero-name", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.3")
+      .to(".hero-role", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
       .to(".hero-desc", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
       .to(".hero-ctas", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
 
@@ -135,30 +153,42 @@ export default function HomePage() {
       gsap.to(el, {
         opacity: 1,
         y: 0,
-        duration: 0.7,
+        duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 85%" },
+        scrollTrigger: { trigger: el, start: "top 88%" },
       });
     });
 
-    gsap.to(".skill-card", {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      stagger: 0.04,
-      ease: "power2.out",
-      scrollTrigger: { trigger: "#skills-grid", start: "top 80%" },
-    });
-
-    gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, i) => {
-      gsap.to(card, {
+    // Enhanced skill card animations with staggered scale
+    gsap.fromTo(".skill-card",
+      { opacity: 0, y: 40, scale: 0.85 },
+      {
         opacity: 1,
         y: 0,
+        scale: 1,
         duration: 0.6,
-        delay: i * 0.1,
-        ease: "power2.out",
-        scrollTrigger: { trigger: card, start: "top 85%" },
-      });
+        stagger: { amount: 1.2, from: "start" },
+        ease: "back.out(1.4)",
+        scrollTrigger: { trigger: "#skills-grid", start: "top 82%" },
+      }
+    );
+
+    // Enhanced project card animations with alternating slide
+    gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, i) => {
+      const fromLeft = i % 2 === 0;
+      gsap.fromTo(card,
+        { opacity: 0, x: fromLeft ? -60 : 60, y: 30, rotateY: fromLeft ? -5 : 5 },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          rotateY: 0,
+          duration: 0.8,
+          delay: i * 0.12,
+          ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 88%" },
+        }
+      );
     });
 
     gsap.to(".timeline", {
@@ -219,8 +249,9 @@ export default function HomePage() {
         const show = filter === "all" || card.dataset.cat === filter;
         gsap.to(card, {
           opacity: show ? 1 : 0.15,
-          scale: show ? 1 : 0.95,
-          duration: 0.3,
+          scale: show ? 1 : 0.92,
+          filter: show ? "blur(0px)" : "blur(2px)",
+          duration: 0.4,
           ease: "power2.out",
         });
       });
@@ -240,19 +271,36 @@ export default function HomePage() {
     <>
       <div className="scroll-indicator" id="scroll-progress" />
       <div className="cursor-glow" id="cursor-glow" />
-      <div className="quantum-field" />
       <div className="noise" />
 
 
       <nav id="navbar">
         <div className="nav-logo">AG</div>
-        <ul className="nav-links">
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div className="nav-right">
+          <ul className="nav-links">
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button className="theme-toggle" onClick={toggleTheme} type="button" aria-label="Toggle theme">
+            <svg className="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg className="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
       </nav>
 
       <section id="hero">
@@ -392,8 +440,8 @@ export default function HomePage() {
       </section>
 
       <footer>
-        <span>(c) 2025 Anmol Gupta</span>
-        <span className="footer-stack">Built with Next.js - Enhanced with GSAP & Three.js</span>
+        <span>© 2025 Anmol Gupta</span>
+        <span className="footer-stack">Built with Next.js · Enhanced with GSAP</span>
       </footer>
     </>
   );
