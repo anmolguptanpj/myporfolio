@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -147,7 +147,12 @@ export default function HomePage() {
       .to(".hero-name", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.3")
       .to(".hero-role", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
       .to(".hero-desc", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
-      .to(".hero-ctas", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
+      .to(".hero-ctas", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+      .fromTo(".hero-visual",
+        { opacity: 0, scale: 0.8, rotateY: -15, rotateX: 5 },
+        { opacity: 1, scale: 1, rotateY: 0, rotateX: 0, duration: 1.2, ease: "power4.out" },
+        "-=0.6"
+      );
 
     gsap.utils.toArray<HTMLElement>(".section-header").forEach((el) => {
       gsap.to(el, {
@@ -305,23 +310,28 @@ export default function HomePage() {
 
       <section id="hero">
         <div className="container">
-          <div className="hero-content">
-            <div className="hero-tag">Available for opportunities</div>
-            <h1 className="hero-name">
-              <span>Anmol</span>
-              <span>Gupta</span>
-            </h1>
-            <p className="hero-role">
-              <span className="highlight">Full-Stack Engineer</span> - Backend Systems - Data Analyst
-            </p>
-            <p className="hero-desc">
-              Building scalable multi-vendor platforms, ML pipelines, and analytics-driven systems.
-              From inventory intelligence to production AWS deployments - end-to-end ownership.
-            </p>
-            <div className="hero-ctas">
-              <a href="#projects" className="btn btn-primary">View Projects</a>
-              <a href="https://github.com/anmolguptanpj" target="_blank" className="btn btn-ghost">GitHub</a>
-              <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn</a>
+          <div className="hero-layout">
+            <div className="hero-content">
+              <div className="hero-tag">Available for opportunities</div>
+              <h1 className="hero-name">
+                <span>Anmol</span>
+                <span>Gupta</span>
+              </h1>
+              <p className="hero-role">
+                <span className="highlight">Full-Stack Engineer</span> - Backend Systems - Data Analyst
+              </p>
+              <p className="hero-desc">
+                Building scalable multi-vendor platforms, ML pipelines, and analytics-driven systems.
+                From inventory intelligence to production AWS deployments - end-to-end ownership.
+              </p>
+              <div className="hero-ctas">
+                <a href="#projects" className="btn btn-primary">View Projects</a>
+                <a href="https://github.com/anmolguptanpj" target="_blank" className="btn btn-ghost">GitHub</a>
+                <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn</a>
+              </div>
+            </div>
+            <div className="hero-visual">
+              <ThreeDClock />
             </div>
           </div>
         </div>
@@ -329,7 +339,7 @@ export default function HomePage() {
 
       <section id="skills">
         <div className="container">
-          <SectionHeader tag="// 001" title="Technical Skills" />
+          <SectionHeader title="Technical Skills" />
           <div className="skills-tabs">
             {[
               ["all", "All"],
@@ -350,7 +360,7 @@ export default function HomePage() {
           </div>
           <div className="skills-grid" id="skills-grid">
             {skills.map((skill) => (
-              <div className="skill-card" data-cat={skill.cat} key={`${skill.cat}-${skill.name}`}>
+              <div className="skill-card" data-cat={skill.cat} data-name={skill.name} key={`${skill.cat}-${skill.name}`}>
                 <span className="skill-icon" aria-hidden="true">
                   <SkillLogo skill={skill} />
                 </span>
@@ -363,7 +373,7 @@ export default function HomePage() {
 
       <section id="projects">
         <div className="container">
-          <SectionHeader tag="// 002" title="Projects" />
+          <SectionHeader title="Projects" />
           <div className="projects-grid">
             <FeaturedProject />
             {projects.map((project) => (
@@ -382,7 +392,7 @@ export default function HomePage() {
  
       <section id="experience">
         <div className="container">
-          <SectionHeader tag="// 003" title="Experience" />
+          <SectionHeader title="Experience" />
           <div className="timeline">
             {experience.map((item) => (
               <div className="timeline-item" key={item.role}>
@@ -398,7 +408,7 @@ export default function HomePage() {
 
       <section id="about">
         <div className="container">
-          <SectionHeader tag="// 004" title="About" />
+          <SectionHeader title="About" />
           <div className="about-grid">
             <div className="about-text">
               <p>Originally from Nepal, currently in Delhi pursuing a BCA from IGNOU and an intensive software engineering career.</p>
@@ -419,7 +429,6 @@ export default function HomePage() {
         <div className="container">
           <div className="contact-grid">
             <div className="contact-text">
-              <div className="section-tag">{"// 005"}</div>
               <h2 className="contact-title">Let&apos;s Build Something</h2>
               <p className="contact-subtitle">
                 Open to full-stack engineering roles, data analyst positions, and freelance projects.
@@ -495,10 +504,98 @@ function SkillLogo({ skill }: { skill: Skill }) {
   );
 }
 
-function SectionHeader({ tag, title }: { tag: string; title: string }) {
+function ThreeDClock() {
+  const clockRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const hrWrapper = document.getElementById("hand-hour-wrapper");
+    const minWrapper = document.getElementById("hand-min-wrapper");
+    const secWrapper = document.getElementById("hand-sec-wrapper");
+
+    let animId: number;
+    const tick = () => {
+      const now = new Date();
+      const ms = now.getMilliseconds();
+      const s = now.getSeconds() + ms / 1000;
+      const m = now.getMinutes() + s / 60;
+      const h = now.getHours() + m / 60;
+
+      const secDeg = s * 6;
+      const minDeg = m * 6;
+      const hrDeg = (h % 12) * 30;
+
+      if (secWrapper) secWrapper.style.transform = `rotateZ(${secDeg}deg)`;
+      if (minWrapper) minWrapper.style.transform = `rotateZ(${minDeg}deg)`;
+      if (hrWrapper) hrWrapper.style.transform = `rotateZ(${hrDeg}deg)`;
+
+      animId = requestAnimationFrame(tick);
+    };
+
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!clockRef.current) return;
+      const stage = clockRef.current.parentElement;
+      if (!stage) return;
+
+      const rect = stage.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Calculate rotation angles (max 25 degrees)
+      const rotX = -(y / (rect.height / 2)) * 25;
+      const rotY = (x / (rect.width / 2)) * 25;
+
+      clockRef.current.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    };
+
+    const handleMouseLeave = () => {
+      if (!clockRef.current) return;
+      clockRef.current.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    };
+
+    const stage = clockRef.current?.parentElement;
+    stage?.addEventListener("mousemove", handleMouseMove);
+    stage?.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      stage?.removeEventListener("mousemove", handleMouseMove);
+      stage?.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  return (
+    <div className="clock-stage">
+      <div className="clock-card-3d" ref={clockRef}>
+        {/* Floating Numbers */}
+        <div className="clock-number num-12">12</div>
+        <div className="clock-number num-3">3</div>
+        <div className="clock-number num-6">6</div>
+        <div className="clock-number num-9">9</div>
+
+        {/* Floating Hands (Sticks) */}
+        <div id="hand-hour-wrapper" className="clock-hand-wrapper">
+          <div className="clock-hand hand-hour" />
+        </div>
+        <div id="hand-min-wrapper" className="clock-hand-wrapper">
+          <div className="clock-hand hand-minute" />
+        </div>
+        <div id="hand-sec-wrapper" className="clock-hand-wrapper">
+          <div className="clock-hand hand-second" />
+        </div>
+
+        {/* Center pin */}
+        <div className="clock-pin" />
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ title }: { title: string }) {
   return (
     <div className="section-header">
-      <p className="section-tag">{tag}</p>
       <h2 className="section-title">{title}</h2>
     </div>
   );
