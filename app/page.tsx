@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -106,248 +105,12 @@ export default function HomePage() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
-    if (!canvas) return;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xffffff, 0);
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 92);
-
-    const heroRig = new THREE.Group();
-    heroRig.position.set(47, 1, -12);
-    heroRig.rotation.set(0.15, -0.18, -0.56);
-    scene.add(heroRig);
-
-    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xd7dde7, 2.15);
-    scene.add(ambientLight);
-
-    const sunLight = new THREE.DirectionalLight(0xffffff, 4.8);
-    sunLight.position.set(-26, 38, 58);
-    sunLight.castShadow = true;
-    sunLight.shadow.mapSize.set(2048, 2048);
-    scene.add(sunLight);
-
-    const keyLight = new THREE.PointLight(0xffffff, 3.4, 190);
-    keyLight.position.set(42, 20, 42);
-    scene.add(keyLight);
-
-    const fillLight = new THREE.PointLight(0xb9d2ff, 1.4, 150);
-    fillLight.position.set(-48, -24, 30);
-    scene.add(fillLight);
-
-    const rimMat = new THREE.MeshPhysicalMaterial({
-      color: 0x050505,
-      metalness: 0.62,
-      roughness: 0.18,
-      clearcoat: 1,
-      clearcoatRoughness: 0.08,
-    });
-
-    const torusGeo = new THREE.CylinderGeometry(6.6, 6.6, 45, 96, 1, false);
-    const torusMat = new THREE.MeshPhysicalMaterial({
-      color: 0xf7f8fa,
-      metalness: 0.08,
-      roughness: 0.34,
-      clearcoat: 0.82,
-      clearcoatRoughness: 0.18,
-    });
-    const torus = new THREE.Mesh(torusGeo, torusMat);
-    torus.castShadow = true;
-    torus.receiveShadow = true;
-    heroRig.add(torus);
-
-    const capGeo = new THREE.CylinderGeometry(6.72, 6.72, 4.6, 96);
-    const coreGeo = capGeo;
-    const coreMat = rimMat;
-    const core = new THREE.Mesh(coreGeo, coreMat);
-    core.position.y = 24.8;
-    core.castShadow = true;
-    core.receiveShadow = true;
-    heroRig.add(core);
-
-    const bottomCap = new THREE.Mesh(capGeo, rimMat);
-    bottomCap.position.y = -24.8;
-    bottomCap.castShadow = true;
-    bottomCap.receiveShadow = true;
-    heroRig.add(bottomCap);
-
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x4c46a8,
-      metalness: 0.08,
-      roughness: 0.05,
-      transmission: 0.18,
-      transparent: true,
-      opacity: 0.86,
-      clearcoat: 1,
-      clearcoatRoughness: 0.03,
-    });
-    const ringMat = glassMat;
-    const rings = new THREE.Group();
-    const ringGeos: THREE.BufferGeometry[] = [];
-    const windowGeo = new THREE.CapsuleGeometry(2.05, 8.6, 12, 36);
-    const glassWindow = new THREE.Mesh(windowGeo, glassMat);
-    glassWindow.position.set(0, -11.5, 6.25);
-    glassWindow.rotation.x = Math.PI / 2;
-    glassWindow.castShadow = true;
-    rings.add(glassWindow);
-    ringGeos.push(windowGeo);
-
-    const upperButtonGeo = new THREE.CapsuleGeometry(1.55, 5.4, 10, 32);
-    const upperButton = new THREE.Mesh(upperButtonGeo, rimMat);
-    upperButton.position.set(-2.45, 17.1, 6.45);
-    upperButton.rotation.x = Math.PI / 2;
-    upperButton.castShadow = true;
-    rings.add(upperButton);
-    ringGeos.push(upperButtonGeo);
-
-    const lowerButton = new THREE.Mesh(upperButtonGeo, rimMat);
-    lowerButton.position.set(2.25, 16.8, 6.45);
-    lowerButton.rotation.x = Math.PI / 2;
-    lowerButton.castShadow = true;
-    rings.add(lowerButton);
-    heroRig.add(rings);
-
-    const highlightGeo = new THREE.CapsuleGeometry(0.45, 35, 8, 18);
-    const shardGeo = highlightGeo;
-    const shardMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.36,
-    });
-    const shards: THREE.Mesh[] = [];
-    const shine = new THREE.Mesh(shardGeo, shardMat);
-    shine.position.set(-3.8, -1, 6.52);
-    shine.rotation.x = Math.PI / 2;
-    heroRig.add(shine);
-    shards.push(shine);
-
-    const count = 520;
-    const geo = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
-    const palette = [
-      new THREE.Color(0xe5e7eb),
-      new THREE.Color(0xcbd5e1),
-      new THREE.Color(0xf8fafc),
-    ];
-
-    for (let i = 0; i < count; i += 1) {
-      positions[i * 3] = 24 + (Math.random() - 0.5) * 120;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 96;
-      positions[i * 3 + 2] = -70 + Math.random() * 55;
-      const c = palette[Math.floor(Math.random() * palette.length)];
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-      sizes[i] = Math.random() * 1.2 + 0.15;
-    }
-
-    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    geo.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
-
-    const mat = new THREE.PointsMaterial({
-      size: 0.72,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.3,
-      sizeAttenuation: true,
-      depthWrite: false,
-    });
-
-    const particles = new THREE.Points(geo, mat);
-    scene.add(particles);
-
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0xd4dbe6,
-      transparent: true,
-      opacity: 0.22,
-    });
-    const lineGeo = new THREE.BufferGeometry();
-    const lineVerts: number[] = [];
-
-    for (let i = 0; i < 34; i += 1) {
-      const ax = 28 + (Math.random() - 0.5) * 86;
-      const ay = (Math.random() - 0.5) * 72;
-      const az = -50 + Math.random() * 22;
-      lineVerts.push(ax, ay, az);
-      lineVerts.push(
-        ax + (Math.random() - 0.5) * 14,
-        ay + (Math.random() - 0.5) * 14,
-        az + (Math.random() - 0.5) * 8,
-      );
-    }
-
-    lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(lineVerts, 3));
-    scene.add(new THREE.LineSegments(lineGeo, lineMat));
-
-    const planeGeo = new THREE.PlaneGeometry(150, 90);
-    const planeMat = new THREE.ShadowMaterial({ color: 0x0f172a, opacity: 0.1 });
-    const shadowPlane = new THREE.Mesh(planeGeo, planeMat);
-    shadowPlane.position.set(31, -30, -20);
-    shadowPlane.rotation.x = -Math.PI / 2;
-    shadowPlane.receiveShadow = true;
-    scene.add(shadowPlane);
-
-    const quantumGeos: THREE.BufferGeometry[] = [planeGeo];
-    const quantumMats: THREE.LineBasicMaterial[] = [];
-    const quantumWaves: THREE.Line[] = [];
-    for (let wave = 0; wave < 2; wave += 1) {
-      const waveGeo = new THREE.BufferGeometry();
-      const wavePositions = new Float32Array(90 * 3);
-      for (let i = 0; i < 90; i += 1) {
-        const t = i / 89;
-        const x = 8 + (t - 0.5) * 110;
-        const y = Math.sin(t * Math.PI * 2 + wave * 0.8) * 3 + (wave - 0.5) * 8;
-        const z = -58 + wave * 6;
-        wavePositions[i * 3] = x;
-        wavePositions[i * 3 + 1] = y;
-        wavePositions[i * 3 + 2] = z;
-      }
-      waveGeo.setAttribute("position", new THREE.BufferAttribute(wavePositions, 3));
-      const waveMat = new THREE.LineBasicMaterial({
-        color: 0xd7dee8,
-        transparent: true,
-        opacity: 0.14,
-      });
-      const waveLine = new THREE.Line(waveGeo, waveMat);
-      waveLine.rotation.y = wave * 0.18;
-      waveLine.rotation.z = (wave - 3) * 0.04;
-      scene.add(waveLine);
-      quantumGeos.push(waveGeo);
-      quantumMats.push(waveMat);
-      quantumWaves.push(waveLine);
-    }
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let frame = 0;
-    let animationId = 0;
-
     const handleMouseMove = (event: MouseEvent) => {
-      mouseX = (event.clientX / window.innerWidth - 0.5) * 0.4;
-      mouseY = (event.clientY / window.innerHeight - 0.5) * 0.4;
-
       const glow = document.getElementById("cursor-glow");
       if (glow) {
         glow.style.left = `${event.clientX}px`;
         glow.style.top = `${event.clientY}px`;
       }
-    };
-
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
     const handleScroll = () => {
@@ -357,34 +120,6 @@ export default function HomePage() {
       if (progress) progress.style.width = `${pct}%`;
     };
 
-    const animate = () => {
-      animationId = requestAnimationFrame(animate);
-      frame += 0.003;
-      particles.rotation.y = frame * 0.03 + mouseX * 0.22;
-      particles.rotation.x = frame * 0.015 + mouseY * 0.16;
-      heroRig.rotation.x = 0.15 + Math.sin(frame * 1.2) * 0.025 + mouseY * 0.16;
-      heroRig.rotation.y = -0.18 + mouseX * 0.28;
-      heroRig.rotation.z = -0.56 + Math.sin(frame * 1.6) * 0.012;
-      torus.rotation.y = Math.sin(frame * 1.25) * 0.018;
-      core.rotation.y = torus.rotation.y;
-      bottomCap.rotation.y = torus.rotation.y;
-      rings.rotation.y = torus.rotation.y;
-      quantumWaves.forEach((wave, index) => {
-        wave.rotation.y = Math.sin(frame * 1.5 + index) * 0.015;
-        wave.rotation.x = Math.sin(frame * 1.4 + index) * 0.018;
-        wave.position.z = Math.sin(frame * 2 + index) * 1.5;
-      });
-      shards.forEach((shard, index) => {
-        (shard.material as THREE.Material).opacity = 0.28 + Math.sin(frame * 4 + index) * 0.08;
-      });
-      camera.position.x += (mouseX * 10 - camera.position.x) * 0.035;
-      camera.position.y += (-mouseY * 7 - camera.position.y) * 0.035;
-      camera.lookAt(0, 0, 0);
-      renderer.render(scene, camera);
-    };
-
-    animate();
-    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("mousemove", handleMouseMove);
 
@@ -494,28 +229,10 @@ export default function HomePage() {
     tabButtons.forEach((btn) => btn.addEventListener("click", handleTabClick));
 
     return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousemove", handleMouseMove);
       tabButtons.forEach((btn) => btn.removeEventListener("click", handleTabClick));
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      renderer.dispose();
-      geo.dispose();
-      mat.dispose();
-      lineGeo.dispose();
-      lineMat.dispose();
-      torusGeo.dispose();
-      torusMat.dispose();
-      coreGeo.dispose();
-      coreMat.dispose();
-      ringGeos.forEach((ringGeo) => ringGeo.dispose());
-      ringMat.dispose();
-      shardGeo.dispose();
-      shardMat.dispose();
-      quantumGeos.forEach((waveGeo) => waveGeo.dispose());
-      quantumMats.forEach((waveMat) => waveMat.dispose());
-      planeMat.dispose();
     };
   }, []);
 
@@ -525,7 +242,7 @@ export default function HomePage() {
       <div className="cursor-glow" id="cursor-glow" />
       <div className="quantum-field" />
       <div className="noise" />
-      <canvas id="hero-canvas" />
+
 
       <nav id="navbar">
         <div className="nav-logo">AG</div>
@@ -614,7 +331,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+ 
       <section id="experience">
         <div className="container">
           <SectionHeader tag="// 003" title="Experience" />
@@ -763,7 +480,7 @@ function FeaturedProject() {
   return (
     <article className="project-card featured">
       <div className="project-body">
-        <p className="project-num">Project 01 - Featured</p>
+        <p className="project-num">Project 01</p>
         <h3 className="project-title">Multi-Vendor Ecommerce Platform</h3>
         <p className="project-desc">
           Production-grade multi-vendor platform with three isolated control centers - Admin,
