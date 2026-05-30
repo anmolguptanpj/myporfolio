@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
 type Skill = {
   cat: "frontend" | "backend" | "data" | "infra";
   logoUrl?: string;
@@ -102,13 +103,10 @@ const experience = [
 ];
 
 export default function HomePage() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  // Initialize theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
-    if (saved) setTheme(saved);
-  }, []);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("portfolio-theme") as "dark" | "light" | null) ?? "dark";
+  });
 
   // Apply theme to document
   useEffect(() => {
@@ -330,9 +328,7 @@ export default function HomePage() {
                 <a href="https://www.linkedin.com/in/itheanmolgupta/" target="_blank" className="btn btn-ghost">LinkedIn</a>
               </div>
             </div>
-            <div className="hero-visual">
-              <ThreeDClock />
-            </div>
+            <div className="hero-visual" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -497,6 +493,8 @@ export default function HomePage() {
   );
 }
 
+
+
 function SkillLogo({ skill }: { skill: Skill }) {
   if (skill.customLogo === "powerbi") {
     return (
@@ -542,95 +540,6 @@ function SkillLogo({ skill }: { skill: Skill }) {
         event.currentTarget.closest(".skill-card")?.classList.add("logo-missing");
       }}
     />
-  );
-}
-
-function ThreeDClock() {
-  const clockRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const hrWrapper = document.getElementById("hand-hour-wrapper");
-    const minWrapper = document.getElementById("hand-min-wrapper");
-    const secWrapper = document.getElementById("hand-sec-wrapper");
-
-    let animId: number;
-    const tick = () => {
-      const now = new Date();
-      const ms = now.getMilliseconds();
-      const s = now.getSeconds() + ms / 1000;
-      const m = now.getMinutes() + s / 60;
-      const h = now.getHours() + m / 60;
-
-      const secDeg = s * 6;
-      const minDeg = m * 6;
-      const hrDeg = (h % 12) * 30;
-
-      if (secWrapper) secWrapper.style.transform = `rotateZ(${secDeg}deg)`;
-      if (minWrapper) minWrapper.style.transform = `rotateZ(${minDeg}deg)`;
-      if (hrWrapper) hrWrapper.style.transform = `rotateZ(${hrDeg}deg)`;
-
-      animId = requestAnimationFrame(tick);
-    };
-
-    animId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animId);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!clockRef.current) return;
-      const stage = clockRef.current.parentElement;
-      if (!stage) return;
-
-      const rect = stage.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      // Calculate rotation angles (max 25 degrees)
-      const rotX = -(y / (rect.height / 2)) * 25;
-      const rotY = (x / (rect.width / 2)) * 25;
-
-      clockRef.current.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    };
-
-    const handleMouseLeave = () => {
-      if (!clockRef.current) return;
-      clockRef.current.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    };
-
-    const stage = clockRef.current?.parentElement;
-    stage?.addEventListener("mousemove", handleMouseMove);
-    stage?.addEventListener("mouseleave", handleMouseLeave);
-    return () => {
-      stage?.removeEventListener("mousemove", handleMouseMove);
-      stage?.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  return (
-    <div className="clock-stage">
-      <div className="clock-card-3d" ref={clockRef}>
-        {/* Floating Numbers */}
-        <div className="clock-number num-12">12</div>
-        <div className="clock-number num-3">3</div>
-        <div className="clock-number num-6">6</div>
-        <div className="clock-number num-9">9</div>
-
-        {/* Floating Hands (Sticks) */}
-        <div id="hand-hour-wrapper" className="clock-hand-wrapper">
-          <div className="clock-hand hand-hour" />
-        </div>
-        <div id="hand-min-wrapper" className="clock-hand-wrapper">
-          <div className="clock-hand hand-minute" />
-        </div>
-        <div id="hand-sec-wrapper" className="clock-hand-wrapper">
-          <div className="clock-hand hand-second" />
-        </div>
-
-        {/* Center pin */}
-        <div className="clock-pin" />
-      </div>
-    </div>
   );
 }
 
