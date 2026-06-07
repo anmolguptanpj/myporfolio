@@ -1641,6 +1641,37 @@ footer {
 
 .footer-stack { color: var(--muted); opacity: 0.5; }
 
+.view-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)),
+    rgba(255,255,255,0.04);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -10px 22px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .view-counter {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.32)),
+    rgba(208,23,96,0.035);
+  box-shadow:
+    0 12px 28px rgba(208,23,96,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    inset 0 -10px 22px rgba(208,23,96,0.04);
+}
+
 /* ────────────────── Responsive ────────────────── */
 
 @media (max-width: 768px) {

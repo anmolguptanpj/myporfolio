@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -487,6 +487,7 @@ export default function HomePage() {
 
       <footer>
         <span>© 2025 Anmol Gupta</span>
+        <ViewCounter />
         <span className="footer-stack">Built with Next.js · Enhanced with GSAP</span>
       </footer>
     </>
@@ -760,6 +761,67 @@ function ContactLink({
         <div className="contact-link-value">{value}</div>
       </div>
     </a>
+  );
+}
+
+function ViewCounter() {
+  const [total, setTotal] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const getVisitorId = () => {
+      const storageKey = "portfolio-visitor-id";
+      const existing = localStorage.getItem(storageKey);
+      if (existing) return existing;
+
+      const id =
+        typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+      localStorage.setItem(storageKey, id);
+      return id;
+    };
+
+    const updateViews = async () => {
+      try {
+        const response = await fetch("/api/views", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ visitorId: getVisitorId() }),
+        });
+
+        if (!response.ok) throw new Error("Unable to update view count");
+
+        const data = (await response.json()) as { total?: number };
+        if (!cancelled && typeof data.total === "number") {
+          setTotal(data.total);
+        }
+      } catch {
+        try {
+          const response = await fetch("/api/views");
+          const data = (await response.json()) as { total?: number };
+          if (!cancelled && typeof data.total === "number") {
+            setTotal(data.total);
+          }
+        } catch {
+          if (!cancelled) setTotal(null);
+        }
+      }
+    };
+
+    updateViews();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <span className="view-counter" aria-live="polite">
+      Visitors till today: {total === null ? "..." : total.toLocaleString()}
+    </span>
   );
 }
 
